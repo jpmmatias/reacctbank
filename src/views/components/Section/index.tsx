@@ -2,12 +2,21 @@ import React, { ReactNode } from 'react';
 import { Section } from './style';
 
 interface SectionProps {
-	background: 'purple' | 'white' | 'image';
+	background: 'purple' | 'gray' | 'image';
+	backgroundImage?: string;
 	children: ReactNode;
 }
 
-const SectionHome = ({ background, children }: SectionProps) => {
-	return <Section background={background}>{children}</Section>;
+const SectionHome = ({
+	background,
+	backgroundImage,
+	children,
+}: SectionProps) => {
+	return (
+		<Section background={background} backgroundImage={backgroundImage}>
+			{children}
+		</Section>
+	);
 };
 
 export default SectionHome;
