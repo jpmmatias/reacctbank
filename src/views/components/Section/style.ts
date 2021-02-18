@@ -105,6 +105,7 @@ export const Section = styled.section<sectionProps>`
 				.paragraphwrapper {
 					width: 459px;
 					margin: 0 auto;
+					margin-top: 14%;
 					p {
 						font-size: 18px;
 						font-weight: 400;
