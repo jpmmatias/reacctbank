@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { UserSchema } from '../../../services/validations/UserValidation';
+import { UserSchema } from '../../../utils/validations/UserValidation';
 import SectionHome from '../../components/Section';
 import logo from '../../../assets/images/logo.svg';
 import arrowIcon from '../../../assets/icons/right-arrow 1.svg';
@@ -11,8 +11,10 @@ import phoneImage2 from '../../../assets/images/app-bg 2.png';
 import phoneImage3 from '../../../assets/images/pngkey 1.png';
 import backgroundImage from '../../../assets/images/backgroundImageSection.png';
 import happyImage from '../../../assets/images/backgroundmageHappy.png';
-import { ToastContainer, toast, Zoom, Bounce } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { InputMask } from '../../components/InputMask';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 const Home: React.FC = () => {
@@ -21,6 +23,7 @@ const Home: React.FC = () => {
 	const [password, setPassword] = useState('');
 	const [password2, setPassword2] = useState('');
 	const [cpf, setCpf] = useState('');
+	const [redirectLogin, setRedirectLogin] = useState(false);
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -40,10 +43,28 @@ const Home: React.FC = () => {
 		try {
 			const res = await UserSchema.validate(formData);
 			console.log(res);
+			axios
+				.post('https://accenture-java-desafio.herokuapp.com/usuarios', {
+					cpf: res.cpf,
+					login: res.username,
+					nome: res.name,
+					senha: res.password,
+				})
+				.then((res) => {
+					setRedirectLogin(true);
+				})
+				.catch((err) => {
+					console.log(err);
+					toast.error('500: Erro interno do servidor');
+				});
 		} catch (err) {
 			toast.error(err.message);
 		}
 	};
+
+	if (redirectLogin) {
+		return <Redirect to='/login' />;
+	}
 	return (
 		<>
 			<SectionHome background='image' backgroundImage={happyImage}>
@@ -73,15 +94,14 @@ const Home: React.FC = () => {
 								Peça sua conta do cartão de crédito Gama Bank
 							</h2>
 							<form onSubmit={handleSubmit}>
-								<input
+								<InputMask
 									placeholder='Digite seu CPF'
 									type='number'
 									name='cpf'
 									id='cpf'
+									mask={['999.999.999-99']}
 									value={cpf}
-									onChange={(e) => {
-										setCpf(e.target.value);
-									}}
+									onChangeM={setCpf}
 								/>
 								<input
 									placeholder='Escolha o nome do usuário'
@@ -90,7 +110,7 @@ const Home: React.FC = () => {
 									id='username'
 									value={username}
 									onChange={(e) => {
-										setUsername(e.target.value);
+										setUsername(e.target.value.trim());
 									}}
 								/>
 								<input
@@ -110,7 +130,7 @@ const Home: React.FC = () => {
 									id='password'
 									value={password}
 									onChange={(e) => {
-										setPassword(e.target.value);
+										setPassword(e.target.value.trim());
 									}}
 								/>
 								<input
@@ -120,7 +140,7 @@ const Home: React.FC = () => {
 									id='password2'
 									value={password2}
 									onChange={(e) => {
-										setPassword2(e.target.value);
+										setPassword2(e.target.value.trim());
 									}}
 								/>
 								<Button
