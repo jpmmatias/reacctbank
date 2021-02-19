@@ -1,6 +1,6 @@
 import React from 'react';
 import { ButtonContainer } from './style';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 interface ButtonProps {
 	text: string;
@@ -31,29 +31,36 @@ const Button = ({
 	textColorHover,
 	backgroundColorHover,
 }: ButtonProps) => {
+	let history = useHistory();
+	const handleClick = () => {
+		if (LinkTo !== undefined) {
+			history.push(LinkTo);
+		}
+	};
 	if (LinkTo) {
 		return (
-			<Link style={{ textDecoration: 'none' }} to={LinkTo}>
-				<ButtonContainer
-					backgroundColor={backgroundColor}
-					width={widthSize}
-					height={heightSize}
-					textColor={textColor}
-					textSize={textSize}
-					textWeight={textWeight}
-					icon={icon}
-					backgroundColorHover={backgroundColorHover}
-					textColorHover={textColorHover}
-					type={type !== undefined ? type : 'button'}
-				>
-					<span className='text'>{text}</span>
-					{icon && (
-						<span className='icon'>
-							<img src={icon} alt='Icone' aria-hidden='true' />
-						</span>
-					)}
-				</ButtonContainer>
-			</Link>
+			<ButtonContainer
+				onClick={() => {
+					handleClick();
+				}}
+				backgroundColor={backgroundColor}
+				width={widthSize}
+				height={heightSize}
+				textColor={textColor}
+				textSize={textSize}
+				textWeight={textWeight}
+				icon={icon}
+				backgroundColorHover={backgroundColorHover}
+				textColorHover={textColorHover}
+				type={type !== undefined ? type : 'button'}
+			>
+				<span className='text'>{text}</span>
+				{icon && (
+					<span className='icon'>
+						<img src={icon} alt='Icone' aria-hidden='true' />
+					</span>
+				)}
+			</ButtonContainer>
 		);
 	}
 
