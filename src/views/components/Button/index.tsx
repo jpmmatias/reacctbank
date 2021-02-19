@@ -1,7 +1,6 @@
 import React from 'react';
 import { ButtonContainer } from './style';
 import { Link } from 'react-router-dom';
-import { type } from 'os';
 
 interface ButtonProps {
 	text: string;
@@ -9,6 +8,8 @@ interface ButtonProps {
 	textSize: number;
 	icon?: string;
 	backgroundColor: string;
+	backgroundColorHover?: string;
+	textColorHover?: string;
 	widthSize: number;
 	heightSize: number;
 	textWeight?: number;
@@ -27,6 +28,8 @@ const Button = ({
 	textWeight,
 	LinkTo,
 	type,
+	textColorHover,
+	backgroundColorHover,
 }: ButtonProps) => {
 	if (LinkTo) {
 		return (
@@ -39,6 +42,8 @@ const Button = ({
 					textSize={textSize}
 					textWeight={textWeight}
 					icon={icon}
+					backgroundColorHover={backgroundColorHover}
+					textColorHover={textColorHover}
 					type={type !== undefined ? type : 'button'}
 				>
 					<span className='text'>{text}</span>
@@ -55,6 +60,8 @@ const Button = ({
 	return (
 		<ButtonContainer
 			backgroundColor={backgroundColor}
+			textColorHover={textColorHover}
+			backgroundColorHover={backgroundColorHover}
 			width={widthSize}
 			height={heightSize}
 			textColor={textColor}

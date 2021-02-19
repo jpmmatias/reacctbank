@@ -9,6 +9,8 @@ interface ButtonProps {
 	textWeight?: number;
 	iconColor?: '#9B9B9B';
 	icon?: string;
+	textColorHover?: string;
+	backgroundColorHover?: string;
 }
 export const ButtonContainer = styled.button<ButtonProps>`
 	background-color: ${(props) => props.backgroundColor};
@@ -21,12 +23,22 @@ export const ButtonContainer = styled.button<ButtonProps>`
   justify-content:space-around;
   align-items:center;
   cursor:pointer;
+	transition:.25s all;
+
+	&:hover{
+		background-color: ${(props) => props.backgroundColorHover};
+		.text{
+			color: ${(props) => props.textColorHover};
+		}
+	}
 	
 	.text {
 		font-size: ${(props) => props.textSize + 'px'};
 		font-weight: ${(props) =>
 			props.textWeight !== undefined ? props.textWeight : 500};
 		color: ${(props) => props.textColor};
+
+	
 	}
 	.icon {
 		width: 30px;

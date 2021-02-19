@@ -149,6 +149,8 @@ const Home: React.FC = () => {
 									textSize={17}
 									textWeight={500}
 									backgroundColor='#D8D8D8'
+									backgroundColorHover='#8C52E5'
+									textColorHover='#fff'
 									icon={arrowIcon}
 									widthSize={276.74}
 									heightSize={47.66}
