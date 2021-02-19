@@ -6,8 +6,8 @@ import Login from '../views/pages/Login';
 function Routes() {
 	return (
 		<Switch>
-			<Route exact path='/' render={Home} />
-			<Route exact path='/login' render={Login} />
+			<Route exact path='/' component={Home} />
+			<Route path='/login' component={Login} />
 		</Switch>
 	);
 }

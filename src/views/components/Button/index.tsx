@@ -1,6 +1,7 @@
 import React from 'react';
 import { ButtonContainer } from './style';
 import { Link } from 'react-router-dom';
+import { type } from 'os';
 
 interface ButtonProps {
 	text: string;
@@ -12,6 +13,7 @@ interface ButtonProps {
 	heightSize: number;
 	textWeight?: number;
 	LinkTo?: string;
+	type?: 'button' | 'submit' | 'reset' | undefined;
 }
 
 const Button = ({
@@ -24,6 +26,7 @@ const Button = ({
 	heightSize,
 	textWeight,
 	LinkTo,
+	type,
 }: ButtonProps) => {
 	if (LinkTo) {
 		return (
@@ -36,6 +39,7 @@ const Button = ({
 					textSize={textSize}
 					textWeight={textWeight}
 					icon={icon}
+					type={type !== undefined ? type : 'button'}
 				>
 					<span className='text'>{text}</span>
 					{icon && (
@@ -57,6 +61,7 @@ const Button = ({
 			textSize={textSize}
 			textWeight={textWeight}
 			icon={icon}
+			type='submit'
 		>
 			<span className='text'>{text}</span>
 			{icon && (
