@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { UserSchema } from '../../../utils/validations/UserValidation';
 import SectionHome from '../../components/Section';
 import logo from '../../../assets/images/logo.svg';
 import arrowIcon from '../../../assets/icons/right-arrow 1.svg';
@@ -10,11 +11,64 @@ import phoneImage2 from '../../../assets/images/app-bg 2.png';
 import phoneImage3 from '../../../assets/images/pngkey 1.png';
 import backgroundImage from '../../../assets/images/backgroundImageSection.png';
 import happyImage from '../../../assets/images/backgroundmageHappy.png';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { InputMask } from '../../components/InputMask';
+import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 
-const Home = () => {
+const Home: React.FC = () => {
+	const [username, setUsername] = useState('');
+	const [name, setName] = useState('');
+	const [password, setPassword] = useState('');
+	const [password2, setPassword2] = useState('');
+	const [cpf, setCpf] = useState('');
+	const [redirectLogin, setRedirectLogin] = useState(false);
+
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+		let formData: {
+			cpf: string;
+			name: string;
+			username: string;
+			password: string;
+			password2: string;
+		} = {
+			cpf: cpf,
+			username: username,
+			name: name,
+			password: password,
+			password2: password2,
+		};
+		try {
+			const res = await UserSchema.validate(formData);
+			console.log(res);
+			axios
+				.post('https://accenture-java-desafio.herokuapp.com/usuarios', {
+					cpf: res.cpf,
+					login: res.username,
+					nome: res.name,
+					senha: res.password,
+				})
+				.then((res) => {
+					setRedirectLogin(true);
+				})
+				.catch((err) => {
+					console.log(err);
+					toast.error('500: Erro interno do servidor');
+				});
+		} catch (err) {
+			toast.error(err.message);
+		}
+	};
+
+	if (redirectLogin) {
+		return <Redirect to='/login' />;
+	}
 	return (
 		<>
 			<SectionHome background='image' backgroundImage={happyImage}>
+				<ToastContainer />
 				<header>
 					<img src={logo} alt='Gama Academy' />
 				</header>
@@ -39,36 +93,55 @@ const Home = () => {
 							<h2 className='homeFormTitle'>
 								Peça sua conta do cartão de crédito Gama Bank
 							</h2>
-							<form>
-								<input
+							<form onSubmit={handleSubmit}>
+								<InputMask
 									placeholder='Digite seu CPF'
 									type='number'
 									name='cpf'
 									id='cpf'
+									mask={['999.999.999-99']}
+									value={cpf}
+									onChangeM={setCpf}
 								/>
 								<input
 									placeholder='Escolha o nome do usuário'
 									type='text'
 									name='username'
 									id='username'
+									value={username}
+									onChange={(e) => {
+										setUsername(e.target.value.trim());
+									}}
 								/>
 								<input
 									placeholder='Nome completo'
 									type='text'
 									name='name'
-									id='username'
+									id='name'
+									value={name}
+									onChange={(e) => {
+										setName(e.target.value);
+									}}
 								/>
 								<input
 									placeholder='Digite sua senha'
-									type='text'
+									type='password'
 									name='password'
 									id='password'
+									value={password}
+									onChange={(e) => {
+										setPassword(e.target.value.trim());
+									}}
 								/>
 								<input
 									placeholder='Confirme sua senha'
-									type='text'
+									type='password'
 									name='password2'
 									id='password2'
+									value={password2}
+									onChange={(e) => {
+										setPassword2(e.target.value.trim());
+									}}
 								/>
 								<Button
 									text='Acessar'
@@ -76,9 +149,12 @@ const Home = () => {
 									textSize={17}
 									textWeight={500}
 									backgroundColor='#D8D8D8'
+									backgroundColorHover='#8C52E5'
+									textColorHover='#fff'
 									icon={arrowIcon}
 									widthSize={276.74}
 									heightSize={47.66}
+									type='submit'
 								></Button>
 							</form>
 						</Card>
