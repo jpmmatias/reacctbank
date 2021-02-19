@@ -10,6 +10,7 @@ export const Container = styled.div`
 		font-size: 19px;
 		font-weight: 700;
 		margin-bottom: 30px;
+		text-align: center;
 	}
 	form {
 		display: flex;

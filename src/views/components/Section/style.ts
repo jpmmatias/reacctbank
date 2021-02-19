@@ -50,7 +50,7 @@ export const Section = styled.section<sectionProps>`
 			flex-direction: column;
 			justify-content: center;
 			width: 349px;
-			height: 461.23px;
+			height: 400px;
 		}
 	}
 	.secondSection {
@@ -201,4 +201,26 @@ export const Section = styled.section<sectionProps>`
 			}
 		}
 	}
+	.subtitulo{
+		text-align: center;
+		font-weight: normal;
+		margin-bottom:15px;
+	}
+	.link{
+    margin-top:50px;
+    text-align:center;
+	color:#8C52E5;
+	text-decoration:none;
+	font-size: 13px;
+	line-height: 15,23px;
+	
+  }
+  .link2{
+	margin-top:10px;
+    text-align:center;
+	color:#8C52E5;
+	text-decoration:none;
+	font-size: 13px;
+	line-height: 15,23px; 
+  }
 `;
