@@ -28,7 +28,7 @@ interface Form{
 }
 
 const Home: React.FC = () => {
-	const intialState = {cpf:'', name:'', username:'', password:'', password2:''}
+	const intialState = {cpf:'11111111111', name:'', username:'', password:'', password2:''}
 
 	const [username, setUsername] = useState('');
 	const [name, setName] = useState('');
@@ -42,7 +42,9 @@ const Home: React.FC = () => {
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 
+
 		let res: Form = await validateFields(form);
+		if(res){
 			api.post('usuarios', {
 				cpf: res.cpf,
 				login: res.username,
@@ -55,9 +57,9 @@ const Home: React.FC = () => {
 			.catch((err) => {
 				console.log(err);
 				toast.error('500: Erro interno do servidor');
-			});		
+			});
+		}		
 	}
-
 
 	useEffect(()=>{
 		validateFields(form)
@@ -75,7 +77,6 @@ const Home: React.FC = () => {
 		.then((res:Form) => {
 			return res;
 		}).catch((err:any) =>{
-			console.log(err.inner)
 			err.inner.forEach((err:ValidationError) => {
 				if(err.path){
 					let path:string = err.path
