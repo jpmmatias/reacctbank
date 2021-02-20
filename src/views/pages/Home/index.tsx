@@ -42,7 +42,6 @@ const Home: React.FC = () => {
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 
-
 		let res: Form = await validateFields(form);
 		if(res){
 			api.post('usuarios', {
@@ -58,6 +57,8 @@ const Home: React.FC = () => {
 				console.log(err);
 				toast.error('500: Erro interno do servidor');
 			});
+		}else{
+			toast.error("Preencha os campos inválidos para se cadastrar.")
 		}		
 	}
 
