@@ -15,7 +15,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { InputMask } from '../../components/InputMask';
 import { Redirect } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../../services/api';
 
 const Home: React.FC = () => {
 	const [username, setUsername] = useState('');
@@ -43,8 +43,8 @@ const Home: React.FC = () => {
 		try {
 			const res = await UserSchema.validate(formData);
 			console.log(res);
-			axios
-				.post('https://accenture-java-desafio.herokuapp.com/usuarios', {
+			api
+				.post(`usuarios`, {
 					cpf: res.cpf,
 					login: res.username,
 					nome: res.name,
@@ -54,7 +54,6 @@ const Home: React.FC = () => {
 					setRedirectLogin(true);
 				})
 				.catch((err) => {
-					console.log(err);
 					toast.error('500: Erro interno do servidor');
 				});
 		} catch (err) {
