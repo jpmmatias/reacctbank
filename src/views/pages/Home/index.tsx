@@ -28,7 +28,7 @@ interface Form{
 }
 
 const Home: React.FC = () => {
-	const intialState = {cpf:'11111111111', name:'', username:'', password:'', password2:''}
+	const intialState = {cpf:'', name:'', username:'', password:'', password2:''}
 
 	const [username, setUsername] = useState('');
 	const [name, setName] = useState('');
@@ -95,7 +95,7 @@ const Home: React.FC = () => {
 	if (redirectLogin) {
 		return <Redirect to='/login' />;
 	}
-
+	console.log(form)
 	return (
 		<>
 			<SectionHome background='image' backgroundImage={happyImage}>
@@ -133,6 +133,9 @@ const Home: React.FC = () => {
 									mask={['999.999.999-99']}
 									value={cpf}
 									onChangeM={setCpf}
+									handleChange={handleChange}
+									isInvalid={errors.cpf}
+									
 								/>
 								<InputMessage>
 									<Input
