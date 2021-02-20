@@ -2,8 +2,6 @@ import React from 'react';
 import { mask as masker, unMask } from 'remask';
 import { Input, InputMessage } from '../../pages/Home/style';
 
-
-
 export const InputMask = ({
 	mask,
 	onChangeM,
@@ -26,7 +24,6 @@ export const InputMask = ({
 
 	const handleValue = masker(value, mask);
 	
-
 	return (
 		<InputMessage>
 			<Input
