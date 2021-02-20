@@ -1,5 +1,8 @@
 import React from 'react';
 import { mask as masker, unMask } from 'remask';
+import { Input, InputMessage } from '../../pages/Home/style';
+
+
 
 export const InputMask = ({
 	mask,
@@ -11,21 +14,29 @@ export const InputMask = ({
 	...props
 }: React.InputHTMLAttributes<HTMLInputElement> & {
 	mask: string[];
+	isInvalid:string;
+	handleChange:Function;
 	onChangeM: React.Dispatch<React.SetStateAction<string>>;
 }) => {
 	const handleChange = (e: any) => {
 		const originalValue = unMask(e.target.value);
-		onChangeM(originalValue);
+		props.handleChange(originalValue, name, onChangeM)
+		
 	};
 
 	const handleValue = masker(value, mask);
+	
 
 	return (
-		<input
-			{...props}
-			onChange={handleChange}
-			placeholder={placeholder}
-			value={handleValue}
-		/>
+		<InputMessage>
+			<Input
+				{...props}
+				onChange={handleChange}
+				placeholder={placeholder}
+				value={handleValue}
+				isInvalid={props.isInvalid}
+			/>
+			<p>{props.isInvalid}</p>
+		</InputMessage>
 	);
 };
