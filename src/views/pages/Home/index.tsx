@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { UserSchema } from '../../../utils/validations/UserValidation';
 import SectionHome from '../../components/Section';
 import logo from '../../../assets/images/logo.svg';
@@ -15,57 +15,85 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { InputMask } from '../../components/InputMask';
 import { Redirect } from 'react-router-dom';
-import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import api from '../../../services/api';
+import { ValidationError } from 'yup';
+import { Input, InputMessage } from './style';
+
+interface Form{
+	cpf: string;
+	name: string;
+	username: string;
+	password: string;
+	password2: string;
+}
 
 const Home: React.FC = () => {
+	const intialState = {cpf:'', name:'', username:'', password:'', password2:''}
+
 	const [username, setUsername] = useState('');
 	const [name, setName] = useState('');
 	const [password, setPassword] = useState('');
 	const [password2, setPassword2] = useState('');
 	const [cpf, setCpf] = useState('');
 	const [redirectLogin, setRedirectLogin] = useState(false);
+	const [errors, setErrors] = useState<Form>(intialState);
+	const [form, setForm] = useState<Form>(intialState);
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		let formData: {
-			cpf: string;
-			name: string;
-			username: string;
-			password: string;
-			password2: string;
-		} = {
-			cpf: cpf,
-			username: username,
-			name: name,
-			password: password,
-			password2: password2,
-		};
-		try {
-			const res = await UserSchema.validate(formData);
-			console.log(res);
-			axios
-				.post('https://accenture-java-desafio.herokuapp.com/usuarios', {
-					cpf: res.cpf,
-					login: res.username,
-					nome: res.name,
-					senha: res.password,
-				})
-				.then((res) => {
-					setRedirectLogin(true);
-				})
-				.catch((err) => {
-					console.log(err);
-					toast.error('500: Erro interno do servidor');
-				});
-		} catch (err) {
-			toast.error(err.message);
-		}
-	};
+
+		let res: Form = await validateFields(form);
+			api.post('usuarios', {
+				cpf: res.cpf,
+				login: res.username,
+				nome: res.name,
+				senha: res.password,
+			})
+			.then((res) => {
+				setRedirectLogin(true);
+			})
+			.catch((err) => {
+				console.log(err);
+				toast.error('500: Erro interno do servidor');
+			});		
+	}
+
+
+	useEffect(()=>{
+		validateFields(form)
+	},[form])
+
+	function handleChange(value:string, campo:string, method:React.Dispatch<React.SetStateAction<string>>){
+		method(value)
+		setForm({...form, [campo]:value})
+	}
+
+	async function validateFields(form:Form){
+		let errors:Form = intialState
+
+		const res = await UserSchema.validate(form,{abortEarly:false})
+		.then((res:Form) => {
+			return res;
+		}).catch((err:any) =>{
+			console.log(err.inner)
+			err.inner.forEach((err:ValidationError) => {
+				if(err.path){
+					let path:string = err.path
+					errors = {...errors, [path]:err.message}
+				}		
+			});
+			
+		})
+
+		setErrors(errors)
+
+		return res;		
+	}
 
 	if (redirectLogin) {
 		return <Redirect to='/login' />;
 	}
+
 	return (
 		<>
 			<SectionHome background='image' backgroundImage={happyImage}>
@@ -104,46 +132,70 @@ const Home: React.FC = () => {
 									value={cpf}
 									onChangeM={setCpf}
 								/>
-								<input
-									placeholder='Escolha o nome do usuário'
-									type='text'
-									name='username'
-									id='username'
-									value={username}
-									onChange={(e) => {
-										setUsername(e.target.value.trim());
-									}}
-								/>
-								<input
-									placeholder='Nome completo'
-									type='text'
-									name='name'
-									id='name'
-									value={name}
-									onChange={(e) => {
-										setName(e.target.value);
-									}}
-								/>
-								<input
-									placeholder='Digite sua senha'
-									type='password'
-									name='password'
-									id='password'
-									value={password}
-									onChange={(e) => {
-										setPassword(e.target.value.trim());
-									}}
-								/>
-								<input
-									placeholder='Confirme sua senha'
-									type='password'
-									name='password2'
-									id='password2'
-									value={password2}
-									onChange={(e) => {
-										setPassword2(e.target.value.trim());
-									}}
-								/>
+								<InputMessage>
+									<Input
+										placeholder='Escolha o nome do usuário'
+										type='text'
+										name='username'
+										id='username'
+										value={username}
+										isInvalid={errors.username}
+										onChange={(e) => {
+											handleChange(e.target.value.trim(),"username",setUsername)
+										}}
+									/>
+									{errors.username &&
+										<p>{errors.username}</p>
+									}
+								</InputMessage>
+								<InputMessage>
+									<Input
+										placeholder='Nome completo'
+										type='text'
+										name='name'
+										id='name'
+										isInvalid={errors.name}
+										value={name}
+										onChange={(e) => {
+											handleChange(e.target.value,"name",setName)
+										}}
+									/>
+									{errors.name &&
+										<p>{errors.name}</p>
+									}
+								</InputMessage>
+								<InputMessage>
+									<Input
+										placeholder='Digite sua senha'
+										type='password'
+										name='password'
+										id='password'
+										isInvalid={errors.password}
+										value={password}
+										onChange={(e) => {
+											handleChange(e.target.value.trim(),"password",setPassword)
+										}}
+									/>
+									{errors.password &&
+										<p>{errors.password}</p>
+									}
+								</InputMessage>
+								<InputMessage>
+									<Input
+										placeholder='Confirme sua senha'
+										type='password'
+										name='password2'
+										id='password2'
+										isInvalid={errors.password2}
+										value={password2}
+										onChange={(e) => {
+											handleChange(e.target.value.trim(),"password2",setPassword2)
+										}}
+									/>
+									{errors.password2 &&
+										<p>{errors.password2}</p>
+									}
+								</InputMessage>
 								<Button
 									text='Acessar'
 									textColor='#9B9B9B'

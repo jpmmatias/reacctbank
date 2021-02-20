@@ -1,5 +1,6 @@
 import React from 'react';
 import { mask as masker, unMask } from 'remask';
+
 export const InputMask = ({
 	mask,
 	onChangeM,
