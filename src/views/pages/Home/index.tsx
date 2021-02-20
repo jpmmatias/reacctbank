@@ -16,6 +16,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { InputMask } from '../../components/InputMask';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
 
 const Home: React.FC = () => {
 	const [username, setUsername] = useState('');
