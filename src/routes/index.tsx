@@ -5,6 +5,7 @@ import Home from '../views/pages/Home';
 import Login from '../views/pages/Login';
 import RecoveryPass from '../views/pages/RecoveryPass';
 import PrivateRoute from './privateRoute';
+import ErrorPage from '../views/pages/ErrorPage';
 
 function Routes() {
 	return (
@@ -13,6 +14,7 @@ function Routes() {
 			<Route path='/login' component={Login} />
 			<PrivateRoute path='/dashboard' component={Dashboard} />
 			<Route exact path='/recoveryPass' render={RecoveryPass} />
+			<Route path='/errorPage' component={ErrorPage} />
 		</Switch>
 	);
 }
