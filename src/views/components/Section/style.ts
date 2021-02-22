@@ -201,26 +201,41 @@ export const Section = styled.section<sectionProps>`
 			}
 		}
 	}
-	.subtitulo{
+	.subtitulo {
 		text-align: center;
 		font-weight: normal;
 		margin-bottom:15px;
 	}
-	.link{
-    margin-top:50px;
-    text-align:center;
-	color:#8C52E5;
-	text-decoration:none;
-	font-size: 13px;
-	line-height: 15,23px;
+
+	.subtitulo-error {
+		color: #8C52E5;
+		margin-top: 50px;
+		text-align: center;
+		font-weight: 500;
+		font-size: 23px;
+		margin-bottom: 25px;
+		
+	}
+
+	.img-error {
+		margin-top: 35px;
+		margin-left: 80px;
+	}
+	.link {
+    	margin-top:50px;
+    	text-align:center;
+		color:#8C52E5;
+		text-decoration:none;
+		font-size: 13px;
+		line-height: 15,23px;
 	
   }
-  .link2{
-	margin-top:10px;
-    text-align:center;
-	color:#8C52E5;
-	text-decoration:none;
-	font-size: 13px;
-	line-height: 15,23px; 
+  .link2 {
+		margin-top:10px;
+    	text-align:center;
+		color:#8C52E5;
+		text-decoration:none;
+		font-size: 13px;
+		line-height: 15,23px; 
   }
 `;
