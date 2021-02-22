@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { UserSchema } from '../../../utils/validations/UserValidation';
-import SectionHome from '../../components/Section';
+import Section from '../../components/Section';
 import logo from '../../../assets/images/logo.svg';
 import arrowIcon from '../../../assets/icons/right-arrow 1.svg';
 import arrowIconBlue from '../../../assets/icons/right-arrow-blue.svg';
@@ -20,13 +20,7 @@ import api from '../../../services/api';
 import { ValidationError } from 'yup';
 import { Input, InputMessage } from './style';
 
-interface Form {
-	cpf: string;
-	name: string;
-	username: string;
-	password: string;
-	password2: string;
-}
+import { Form } from '../../../types';
 
 const Home: React.FC = () => {
 	const intialState = {
@@ -108,7 +102,7 @@ const Home: React.FC = () => {
 	}
 	return (
 		<>
-			<SectionHome background='image' backgroundImage={happyImage}>
+			<Section background='image' backgroundImage={happyImage}>
 				<ToastContainer />
 				<header>
 					<img src={logo} alt='Gama Academy' />
@@ -231,8 +225,8 @@ const Home: React.FC = () => {
 						</Card>
 					</div>
 				</div>
-			</SectionHome>
-			<SectionHome background='gray'>
+			</Section>
+			<Section background='gray'>
 				<div className='secondSection'>
 					<div className='phoneSection'>
 						<h1>Conta digital do Gama Academy</h1>
@@ -257,8 +251,8 @@ const Home: React.FC = () => {
 						</div>
 					</div>
 				</div>
-			</SectionHome>
-			<SectionHome background='purple'>
+			</Section>
+			<Section background='purple'>
 				<div className='thirdSection'>
 					<div className='divisor'>
 						<div>
@@ -273,8 +267,8 @@ const Home: React.FC = () => {
 						<h1>0,00</h1>
 					</div>
 				</div>
-			</SectionHome>
-			<SectionHome background='image' backgroundImage={backgroundImage}>
+			</Section>
+			<Section background='image' backgroundImage={backgroundImage}>
 				<div className='forthSection'>
 					<div>
 						<h1>O fim da complexidade</h1>
@@ -284,8 +278,8 @@ const Home: React.FC = () => {
 						</p>
 					</div>
 				</div>
-			</SectionHome>
-			<SectionHome background='gray'>
+			</Section>
+			<Section background='gray'>
 				<div className='lastSection'>
 					<div className='content'>
 						<div className='contentWrapper'>
@@ -304,7 +298,7 @@ const Home: React.FC = () => {
 						/>
 					</div>
 				</div>
-			</SectionHome>
+			</Section>
 		</>
 	);
 };

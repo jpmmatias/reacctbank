@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../../components/Card';
-import SectionHome from '../../components/Section';
+import Section from '../../components/Section';
 import hiddenImg from '../../../assets/images/hidden.svg';
 import logo from '../../../assets/images/gamaDashboardLogo.svg';
 import pixImg from '../../../assets/icons/Pix.svg';
@@ -13,36 +13,10 @@ import jwt_decote from 'jwt-decode';
 import { toast } from 'react-toastify';
 import api from '../../../services/api';
 
-interface IUser {
-	idUsuario: number;
-	sub: string;
-}
-
-interface ILancamento {
-	conta: number;
-	contaDestino: string;
-	data: string;
-	descricao: string;
-	login: string;
-	planoConta: number;
-	valor: number;
-}
-
-interface IDadosUser {
-	contaBanco: {
-		saldo: number;
-		id: number;
-		lancamentos: any;
-	};
-	contaCredito: {
-		saldo: number;
-		id: number;
-		lancamentos: any;
-	};
-}
+import { DadosUser, User, LancamentoProps } from '../../../types';
 
 const Dashboard = () => {
-	const [dadosUser, setDadosUser] = useState<IDadosUser>();
+	const [dadosUser, setDadosUser] = useState<DadosUser>();
 
 	const history = useHistory();
 
@@ -52,7 +26,7 @@ const Dashboard = () => {
 		if (TokenStorage) {
 			const TokenArr = TokenStorage.split(' ');
 			const TokenDecode = TokenArr[1];
-			const decoded = jwt_decote<IUser>(TokenDecode);
+			const decoded = jwt_decote<User>(TokenDecode);
 			return decoded.sub;
 		} else {
 			alert('err');
@@ -82,7 +56,7 @@ const Dashboard = () => {
 	}, []);
 
 	return (
-		<SectionHome background='purple'>
+		<Section background='purple'>
 			<Container>
 				<Sidebar>
 					<div className='logo'>
@@ -180,12 +154,12 @@ const Dashboard = () => {
 							<ul className='lançamentos'>
 								{dadosUser?.contaBanco.lancamentos.lenght > 0 ? (
 									dadosUser?.contaBanco.lancamentos.forEach(
-										(lancamento: ILancamento) => {
+										(lancamento: LancamentoProps) => {
 											return (
 												<Lancamento
-													tipoDeCompra={lancamento.descricao}
-													nomeEmpresa={lancamento.contaDestino}
-													custo={lancamento.valor}
+													descricao={lancamento.descricao}
+													contaDestino={lancamento.contaDestino}
+													valor={lancamento.valor}
 													data={lancamento.data}
 												/>
 											);
@@ -199,7 +173,7 @@ const Dashboard = () => {
 					</div>
 				</Content>
 			</Container>
-		</SectionHome>
+		</Section>
 	);
 };
 

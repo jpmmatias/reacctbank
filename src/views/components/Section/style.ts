@@ -5,7 +5,7 @@ interface sectionProps {
 	backgroundImage?: string;
 }
 
-export const Section = styled.section<sectionProps>`
+export const Container = styled.section<sectionProps>`
 	width: 100vw;
 	height: 100vh;
 	overflow: hidden;
@@ -204,17 +204,16 @@ export const Section = styled.section<sectionProps>`
 	.subtitulo {
 		text-align: center;
 		font-weight: normal;
-		margin-bottom:15px;
+		margin-bottom: 15px;
 	}
 
 	.subtitulo-error {
-		color: #8C52E5;
+		color: #8c52e5;
 		margin-top: 50px;
 		text-align: center;
 		font-weight: 500;
 		font-size: 23px;
 		margin-bottom: 25px;
-		
 	}
 
 	.img-error {
@@ -222,20 +221,19 @@ export const Section = styled.section<sectionProps>`
 		margin-left: 80px;
 	}
 	.link {
-    	margin-top:50px;
-    	text-align:center;
-		color:#8C52E5;
-		text-decoration:none;
+		margin-top: 50px;
+		text-align: center;
+		color: #8c52e5;
+		text-decoration: none;
 		font-size: 13px;
-		line-height: 15,23px;
-	
-  }
-  .link2 {
-		margin-top:10px;
-    	text-align:center;
-		color:#8C52E5;
-		text-decoration:none;
+		line-height: 15, 23px;
+	}
+	.link2 {
+		margin-top: 10px;
+		text-align: center;
+		color: #8c52e5;
+		text-decoration: none;
 		font-size: 13px;
-		line-height: 15,23px; 
-  }
+		line-height: 15, 23px;
+	}
 `;

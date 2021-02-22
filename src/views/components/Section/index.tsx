@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Section } from './style';
+import { Container } from './style';
 
 interface SectionProps {
 	background: 'purple' | 'gray' | 'image';
@@ -7,16 +7,12 @@ interface SectionProps {
 	children: ReactNode;
 }
 
-const SectionHome = ({
-	background,
-	backgroundImage,
-	children,
-}: SectionProps) => {
+const Section = ({ background, backgroundImage, children }: SectionProps) => {
 	return (
-		<Section background={background} backgroundImage={backgroundImage}>
+		<Container background={background} backgroundImage={backgroundImage}>
 			{children}
-		</Section>
+		</Container>
 	);
 };
 
-export default SectionHome;
+export default Section;
