@@ -8,6 +8,7 @@ import dollar from '../../../assets/icons/dollar.svg';
 import cardCredit from '../../../assets/icons/credit-card.svg';
 import { Sidebar, Container, Content } from './style';
 import Lancamento from '../../components/Lançamento';
+
 const Dashboard = () => {
 	return (
 		<SectionHome background='purple'>

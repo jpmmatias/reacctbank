@@ -4,6 +4,7 @@ import Dashboard from '../views/pages/Dashboard';
 import Home from '../views/pages/Home';
 import Login from '../views/pages/Login';
 import RecoveryPass from '../views/pages/RecoveryPass';
+import PrivateRoute from './privateRoute';
 import ErrorPage from '../views/pages/ErrorPage';
 
 function Routes() {
@@ -11,7 +12,7 @@ function Routes() {
 		<Switch>
 			<Route exact path='/' component={Home} />
 			<Route path='/login' component={Login} />
-			<Route path='/dashboard' component={Dashboard} />
+			<PrivateRoute path='/dashboard' component={Dashboard} />
 			<Route exact path='/recoveryPass' render={RecoveryPass} />
 			<Route path='/errorPage' component={ErrorPage} />
 		</Switch>

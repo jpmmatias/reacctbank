@@ -16,6 +16,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { InputMask } from '../../components/InputMask';
 import { Redirect } from 'react-router-dom';
 import api from '../../../services/api';
+
 import { ValidationError } from 'yup';
 import { Input, InputMessage } from './style';
 
@@ -26,6 +27,7 @@ interface Form{
 	password: string;
 	password2: string;
 }
+
 
 const Home: React.FC = () => {
 	const intialState = {cpf:'', name:'', username:'', password:'', password2:''}
@@ -41,6 +43,7 @@ const Home: React.FC = () => {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
+
 
 		let res: Form = await validateFields(form);
 		if(res){
@@ -91,6 +94,7 @@ const Home: React.FC = () => {
 
 		return res;		
 	}
+
 
 	if (redirectLogin) {
 		return <Redirect to='/login' />;
