@@ -5,7 +5,7 @@ import { Container, Content, Data } from './style';
 interface LancamentoProps {
 	tipoDeCompra: string;
 	nomeEmpresa: string;
-	custo: string;
+	custo: number;
 	data: string;
 }
 
