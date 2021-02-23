@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { UserSchema } from '../../../utils/validations/UserValidation';
-import SectionHome from '../../components/Section';
+import Section from '../../components/Section';
 import logo from '../../../assets/images/logo.svg';
 import arrowIcon from '../../../assets/icons/right-arrow 1.svg';
 import arrowIconBlue from '../../../assets/icons/right-arrow-blue.svg';
@@ -20,17 +20,16 @@ import api from '../../../services/api';
 import { ValidationError } from 'yup';
 import { Input, InputMessage } from './style';
 
-interface Form{
-	cpf: string;
-	name: string;
-	username: string;
-	password: string;
-	password2: string;
-}
-
+import { Form } from '../../../types';
 
 const Home: React.FC = () => {
-	const intialState = {cpf:'', name:'', username:'', password:'', password2:''}
+	const intialState = {
+		cpf: '',
+		name: '',
+		username: '',
+		password: '',
+		password2: '',
+	};
 
 	const [username, setUsername] = useState('');
 	const [name, setName] = useState('');
@@ -44,65 +43,66 @@ const Home: React.FC = () => {
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 
-
 		let res: Form = await validateFields(form);
-		if(res){
-			api.post('usuarios', {
-				cpf: res.cpf,
-				login: res.username,
-				nome: res.name,
-				senha: res.password,
+		if (res) {
+			api
+				.post('usuarios', {
+					cpf: res.cpf,
+					login: res.username,
+					nome: res.name,
+					senha: res.password,
+				})
+				.then((res) => {
+					setRedirectLogin(true);
+				})
+				.catch((err) => {
+					toast.error('500: Erro interno do servidor');
+				});
+		} else {
+			toast.error('Preencha os campos inválidos para se cadastrar.');
+		}
+	};
+
+	useEffect(() => {
+		validateFields(form);
+	}, [form]);
+
+	function handleChange(
+		value: string,
+		campo: string,
+		method: React.Dispatch<React.SetStateAction<string>>
+	) {
+		method(value);
+		setForm({ ...form, [campo]: value });
+	}
+
+	async function validateFields(form: Form) {
+		let errors: Form = intialState;
+
+		const res = await UserSchema.validate(form, { abortEarly: false })
+			.then((res: Form) => {
+				return res;
 			})
-			.then((res) => {
-				setRedirectLogin(true);
-			})
-			.catch((err) => {
-				console.log(err);
-				toast.error('500: Erro interno do servidor');
+			.catch((err: any) => {
+				err.inner.forEach((err: ValidationError) => {
+					if (err.path) {
+						let path: string = err.path;
+						errors = { ...errors, [path]: err.message };
+					}
+				});
 			});
-		}else{
-			toast.error("Preencha os campos inválidos para se cadastrar.")
-		}		
+
+		setErrors(errors);
+
+		return res;
 	}
-
-	useEffect(()=>{
-		validateFields(form)
-	},[form])
-
-	function handleChange(value:string, campo:string, method:React.Dispatch<React.SetStateAction<string>>){
-		method(value)
-		setForm({...form, [campo]:value})
-	}
-
-	async function validateFields(form:Form){
-		let errors:Form = intialState
-
-		const res = await UserSchema.validate(form,{abortEarly:false})
-		.then((res:Form) => {
-			return res;
-		}).catch((err:any) =>{
-			err.inner.forEach((err:ValidationError) => {
-				if(err.path){
-					let path:string = err.path
-					errors = {...errors, [path]:err.message}
-				}		
-			});
-			
-		})
-
-		setErrors(errors)
-
-		return res;		
-	}
-
 
 	if (redirectLogin) {
 		return <Redirect to='/login' />;
 	}
-	console.log(form)
 	return (
 		<>
-			<SectionHome background='image' backgroundImage={happyImage}>
+			<Section background='image' backgroundImage={happyImage}>
 				<ToastContainer />
 				<header>
 					<img src={logo} alt='Gama Academy' />
@@ -139,7 +139,6 @@ const Home: React.FC = () => {
 									onChangeM={setCpf}
 									handleChange={handleChange}
 									isInvalid={errors.cpf}
-									
 								/>
 								<InputMessage>
 									<Input
@@ -150,12 +149,14 @@ const Home: React.FC = () => {
 										value={username}
 										isInvalid={errors.username}
 										onChange={(e) => {
-											handleChange(e.target.value.trim(),"username",setUsername)
+											handleChange(
+												e.target.value.trim(),
+												'username',
+												setUsername
+											);
 										}}
 									/>
-									{errors.username &&
-										<p>{errors.username}</p>
-									}
+									{errors.username && <p>{errors.username}</p>}
 								</InputMessage>
 								<InputMessage>
 									<Input
@@ -166,12 +167,10 @@ const Home: React.FC = () => {
 										isInvalid={errors.name}
 										value={name}
 										onChange={(e) => {
-											handleChange(e.target.value,"name",setName)
+											handleChange(e.target.value, 'name', setName);
 										}}
 									/>
-									{errors.name &&
-										<p>{errors.name}</p>
-									}
+									{errors.name && <p>{errors.name}</p>}
 								</InputMessage>
 								<InputMessage>
 									<Input
@@ -182,12 +181,14 @@ const Home: React.FC = () => {
 										isInvalid={errors.password}
 										value={password}
 										onChange={(e) => {
-											handleChange(e.target.value.trim(),"password",setPassword)
+											handleChange(
+												e.target.value.trim(),
+												'password',
+												setPassword
+											);
 										}}
 									/>
-									{errors.password &&
-										<p>{errors.password}</p>
-									}
+									{errors.password && <p>{errors.password}</p>}
 								</InputMessage>
 								<InputMessage>
 									<Input
@@ -198,12 +199,14 @@ const Home: React.FC = () => {
 										isInvalid={errors.password2}
 										value={password2}
 										onChange={(e) => {
-											handleChange(e.target.value.trim(),"password2",setPassword2)
+											handleChange(
+												e.target.value.trim(),
+												'password2',
+												setPassword2
+											);
 										}}
 									/>
-									{errors.password2 &&
-										<p>{errors.password2}</p>
-									}
+									{errors.password2 && <p>{errors.password2}</p>}
 								</InputMessage>
 								<Button
 									text='Acessar'
@@ -222,8 +225,8 @@ const Home: React.FC = () => {
 						</Card>
 					</div>
 				</div>
-			</SectionHome>
-			<SectionHome background='gray'>
+			</Section>
+			<Section background='gray'>
 				<div className='secondSection'>
 					<div className='phoneSection'>
 						<h1>Conta digital do Gama Academy</h1>
@@ -248,8 +251,8 @@ const Home: React.FC = () => {
 						</div>
 					</div>
 				</div>
-			</SectionHome>
-			<SectionHome background='purple'>
+			</Section>
+			<Section background='purple'>
 				<div className='thirdSection'>
 					<div className='divisor'>
 						<div>
@@ -264,8 +267,8 @@ const Home: React.FC = () => {
 						<h1>0,00</h1>
 					</div>
 				</div>
-			</SectionHome>
-			<SectionHome background='image' backgroundImage={backgroundImage}>
+			</Section>
+			<Section background='image' backgroundImage={backgroundImage}>
 				<div className='forthSection'>
 					<div>
 						<h1>O fim da complexidade</h1>
@@ -275,8 +278,8 @@ const Home: React.FC = () => {
 						</p>
 					</div>
 				</div>
-			</SectionHome>
-			<SectionHome background='gray'>
+			</Section>
+			<Section background='gray'>
 				<div className='lastSection'>
 					<div className='content'>
 						<div className='contentWrapper'>
@@ -295,7 +298,7 @@ const Home: React.FC = () => {
 						/>
 					</div>
 				</div>
-			</SectionHome>
+			</Section>
 		</>
 	);
 };
