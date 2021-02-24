@@ -17,6 +17,13 @@ const RecoveryPass = () => {
 
 	function handleRecoveryPass(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
+		if (email.length === 0) {
+			return toast.error('Por favor insira seu email');
+		}
+
+		if (username.length === 0) {
+			return toast.error('Por favor insira seu usuário');
+		}
 
 		api
 			.post(`nova-senha`, { email: 'email@dominio.com', login: username })
@@ -73,6 +80,16 @@ const RecoveryPass = () => {
 									heightSize={47.66}
 									type='submit'
 								></Button>
+								<p className='link2'>
+									<Link className='link' to='/login'>
+										Voltar para o login{' '}
+									</Link>
+								</p>
+								<p className='link2'>
+									<Link className='link' to='/'>
+										Ainda não sou cliente{' '}
+									</Link>
+								</p>
 							</form>
 						</Card>
 					</div>
