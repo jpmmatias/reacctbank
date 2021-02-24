@@ -1,11 +1,6 @@
 import * as yup from 'yup';
 
-export const UserSchema: any = yup.object().shape({
-	cpf: yup
-		.string()
-		.min(11, 'O CPF deve ter 11 caracteres.')
-		.required('Por favor, insira seu CPF.'),
-	name: yup.string().required('Por favor, insira seu nome.'),
+export const NewPasswordSchema: any = yup.object().shape({
 	username: yup.string().required('Por favor, insira seu nome de usuário.'),
 	password: yup
 		.string()
