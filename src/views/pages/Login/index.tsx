@@ -8,12 +8,9 @@ import { Link, useHistory } from 'react-router-dom';
 import api from '../../../services/api';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
+import { IToken } from '../../../types';
 
 const Login = () => {
-	interface IToken {
-		storage: string;
-	}
-
 	const [username, setUsername] = useState('');
 	const [password, setpassword] = useState('');
 
