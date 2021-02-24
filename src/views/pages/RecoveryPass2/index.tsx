@@ -6,25 +6,47 @@ import Button from '../../components/Button';
 import arrowIcon from '../../../assets/icons/right-arrow 1.svg';
 import api from '../../../services/api';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link, useHistory } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import { NewPasswordSchema } from '../../../utils/validations/NewPasswordValidation';
 
 const RecoveryPass = () => {
 	const [username, setUsername] = useState('');
-	const [email, setemail] = useState('');
+	const [password, setPassword] = useState('');
+	const [password2, setPassword2] = useState('');
 
 	const history = useHistory();
 
+	let { temporaryPass } = useParams<{ temporaryPass: string }>();
+
+	const validateForm = async (form: any) => {
+		return await NewPasswordSchema.validate(form, { abortEarly: false }).then(
+			(res: any) => {
+				return res;
+			}
+		);
+	};
+
 	function handleRecoveryPass(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
-
-		api
-			.post(`nova-senha`, { email: 'email@dominio.com', login: username })
-			.then((res) => {
-				console.log(res);
-				history.push(`/recoveryPass/${res.data}`);
+		NewPasswordSchema.validate(
+			{ username, password, password2 },
+			{ abortEarly: false }
+		)
+			.then((res: any) => {
+				api
+					.post(`altera-senha?senhaTemporaria=${temporaryPass}`, {
+						senha: res.password,
+						usuario: res.username,
+					})
+					.then((res) => {
+						history.push(`/login`);
+					})
+					.catch((err) => {
+						toast.error(err.message);
+					});
 			})
-			.catch((err) => {
+			.catch((err: any) => {
 				toast.error(err.message);
 			});
 	}
@@ -41,17 +63,9 @@ const RecoveryPass = () => {
 						<Card>
 							<form onSubmit={handleRecoveryPass}>
 								<h2 className='homeFormTitle'>Esqueci Minha Senha</h2>
-								<h6 className='subtitulo'>Confirme seu email e seu login</h6>
-								<input
-									type='text'
-									placeholder='Insira seu email'
-									name='email'
-									id='email'
-									onChange={(e) => {
-										setemail(e.target.value);
-									}}
-									value={email}
-								/>
+								<h6 className='subtitulo'>
+									Insira novamente seu login e sua nova senha!
+								</h6>
 								<input
 									type='login'
 									placeholder='Digite seu login'
@@ -60,6 +74,26 @@ const RecoveryPass = () => {
 									value={username}
 									onChange={(e) => {
 										setUsername(e.target.value);
+									}}
+								/>
+								<input
+									type='password'
+									placeholder='Digite sua nova senha'
+									name='password'
+									id='password'
+									value={password}
+									onChange={(e) => {
+										setPassword(e.target.value.trim());
+									}}
+								/>
+								<input
+									type='password'
+									placeholder='Confirme sua nova senha'
+									name='password2'
+									id='password2'
+									value={password2}
+									onChange={(e) => {
+										setPassword2(e.target.value.trim());
 									}}
 								/>
 								<Button

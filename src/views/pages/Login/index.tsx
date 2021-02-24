@@ -31,10 +31,6 @@ const Login = () => {
 	function handleLogin(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 
-		const postData = {
-			usuario: username,
-			senha: password,
-		};
 		api
 			.post(`login`, { senha: password, usuario: username })
 			.then((res) => {
