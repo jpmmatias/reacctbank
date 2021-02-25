@@ -47,5 +47,5 @@ export interface IPlanoConta{
 	id:number,
 	login:string,
 	padrao:boolean,
-	tipoMovimento:'R',
+	tipoMovimento:string,
 }
