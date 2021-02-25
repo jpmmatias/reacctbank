@@ -1,9 +1,11 @@
 import styled from 'styled-components';
+
 export const Container = styled.div`
 	display: flex;
 	width: 100%;
 	height: 100%;
 `;
+
 export const Sidebar = styled.aside`
 	height: 100%;
 	width: 12%;
@@ -63,10 +65,18 @@ export const Sidebar = styled.aside`
 		}
 	}
 `;
-export const Content = styled.main`
+
+interface ContentProps{
+	center?:boolean;
+}
+
+export const Content = styled.main<ContentProps>`
+	display:${(props) => props.center && 'flex'};
+	justify-content:${(props) => props.center && 'center'};
+    align-items:${(props) => props.center && 'center'};
 	margin: auto;
 	height: 90%;
-	width: 70%;
+	width: 70%;	
 	.lançamentos {
 		height: 70%;
 		overflow: auto;

@@ -5,7 +5,7 @@ interface CardProps {
 	children: React.ReactNode;
 }
 
-const Card = ({ children }: CardProps) => {
+const Card = ({ children}: CardProps) => {
 	return <Container>{children}</Container>;
 };
 

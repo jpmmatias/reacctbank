@@ -12,11 +12,14 @@ import { useHistory } from 'react-router-dom';
 import jwt_decote from 'jwt-decode';
 import { toast } from 'react-toastify';
 import api from '../../../services/api';
+import PlanoConta from '../../components/PlanoConta';
 
 import { DadosUser, User, LancamentoProps } from '../../../types';
 
+
 const Dashboard = () => {
 	const [dadosUser, setDadosUser] = useState<DadosUser>();
+	const [screen, setScreen] = useState("planos");
 
 	const history = useHistory();
 
@@ -55,6 +58,7 @@ const Dashboard = () => {
 			});
 	}, []);
 
+
 	return (
 		<Section background='purple'>
 			<Container>
@@ -65,13 +69,19 @@ const Dashboard = () => {
 					<nav>
 						<ul>
 							<li>
-								<div role='button'>
+								<div role='button' onClick={()=>setScreen("home")}>
 									<img src={pixImg} alt='Icone Pix' aria-hidden='true' />
-									<h1>Depositórios</h1>
+									<h1>Home</h1>
 								</div>
 							</li>
 							<li>
-								<div role='button'>
+								<div role='button' onClick={()=>setScreen("deposito")}>
+									<img src={pixImg} alt='Icone Pix' aria-hidden='true' />
+									<h1>Depósitos</h1>
+								</div>
+							</li>
+							<li>
+								<div role='button' onClick={()=>setScreen("planos")}>
 									<img src={pixImg} alt='Icone Pix' aria-hidden='true' />
 									<h1>Planos</h1>
 								</div>
@@ -91,7 +101,8 @@ const Dashboard = () => {
 						</ul>
 					</nav>
 				</Sidebar>
-				<Content>
+				{screen === 'home' &&
+					<Content>
 					<div className='contentHead'>
 						<h1>
 							Olá <span>usuario</span>, seja bem vindo!
@@ -172,6 +183,12 @@ const Dashboard = () => {
 						</Card>
 					</div>
 				</Content>
+				}
+				{screen === 'planos' &&
+					<Content center>
+						<PlanoConta login={tester ? tester : ""}/>
+					</Content>
+				}
 			</Container>
 		</Section>
 	);
