@@ -5,6 +5,7 @@ import { Container } from './styles';
 import {IPlanoContaComponent, IPlanoConta} from '../../../types';
 import api from '../../../services/api';
 import headers from '../../../services/headers';
+import { toast } from 'react-toastify';
 
 const PlanoConta:React.FC<IPlanoContaComponent> = ({login}:IPlanoContaComponent) => {
     const[planosConta, setPlanosConta] = useState<IPlanoConta[]>([])
@@ -38,8 +39,12 @@ const PlanoConta:React.FC<IPlanoContaComponent> = ({login}:IPlanoContaComponent)
         api.post(`lancamentos/planos-conta`, plano, headers)
         .then(res => {
             console.log("Funcionou")
+            loadPlanosConta()
+            setNome("")
+            toast.success("Plano de Conta adicionado com sucesso!")
         }).catch(err =>{
             console.log("Falhou")
+            toast.error("Não foi possível adicionar o novo plano de contas.")
         })
     }
 
@@ -56,7 +61,17 @@ const PlanoConta:React.FC<IPlanoContaComponent> = ({login}:IPlanoContaComponent)
                         </div>
                         <div>
                             <label>Sigla:</label>
-                            <input type="text" value={sigla} onChange={(e) => setSigla(e.target.value.toLocaleUpperCase())}/>
+                            <select onChange={(e)=>setSigla(e.target.value)}>
+                                {planosConta.map(planoConta => { 
+                                    if(planoConta.padrao){
+                                        return( 
+                                        <option value={planoConta.tipoMovimento}>
+                                            {planoConta.descricao} ({planoConta.tipoMovimento})
+                                        </option>
+                                        )
+                                    }     
+                                })}     
+                            </select>
                         </div>
                         <button type="button" onClick={savePlanosConta}>Adicionar</button>
                     </form>
