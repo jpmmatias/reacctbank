@@ -1,21 +1,22 @@
-import { State } from './types';
+import { IToken, Form, User, LancamentoProps, DadosUser, IPlanoContaComponent, IPlanoConta } from '../../../types/index'
 import { Reducer } from 'redux'
 
-const INITIAL_STATE = {
-  users: []
+interface IState {
+  user: User,
 }
 
-const allUsers: Reducer<State | any> = (state = INITIAL_STATE, action) => {
+const INITIAL_STATE = {
+  user: {}
+}
+
+const Users: Reducer<User | any> = (state = INITIAL_STATE, action) => {
   switch(action.type) {
     case 'ADD_USER':
       const { user } = action.payload
         console.log(action.payload)
         return {
           ...state,
-          users: [
-            ...state.users,
-            user
-          ]
+          user
         }
 
       default: {
@@ -24,4 +25,4 @@ const allUsers: Reducer<State | any> = (state = INITIAL_STATE, action) => {
   }
 }
 
-export default allUsers
+export default Users

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, } from 'react';
 import logo from '../../../assets/images/logo.svg';
 import SectionHome from '../../components/Section';
 import Card from '../../components/Card';
@@ -9,10 +9,13 @@ import api from '../../../services/api';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import { IToken } from '../../../types';
+import { useDispatch } from 'react-redux'
+import { UserInfo } from '../../../store/modules/user/actions';
 
 const Login = () => {
 	const [username, setUsername] = useState('');
 	const [password, setpassword] = useState('');
+  const dispatch = useDispatch()
 
 	const history = useHistory();
 
@@ -33,6 +36,7 @@ const Login = () => {
 			.then((res) => {
 				localStorage.setItem('@tokenApp', res.data.token);
 				history.push('/dashboard');
+        console.log( dispatch(UserInfo({idUsuario: 1, sub: 'string'})) )
 			})
 			.catch((err) => {
 				toast.error(err.message);

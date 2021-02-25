@@ -1,6 +1,6 @@
-import { User } from './types';
+import { User } from '../../../types';
 
-export function addNewUser(user: User) {
+export function UserInfo(user: User) {
   return {
     type: 'ADD_USER',
     payload: {
