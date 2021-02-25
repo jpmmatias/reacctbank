@@ -80,14 +80,14 @@ const RecoveryPass = () => {
 									heightSize={47.66}
 									type='submit'
 								></Button>
-								<p className='link2'>
+								<p className='link'>
 									<Link className='link' to='/login'>
-										Voltar para o login{' '}
+										Voltar para o login{' > '}
 									</Link>
 								</p>
 								<p className='link2'>
 									<Link className='link' to='/'>
-										Ainda não sou cliente{' '}
+										Ainda não sou cliente{' > '}
 									</Link>
 								</p>
 							</form>

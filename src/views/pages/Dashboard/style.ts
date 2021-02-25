@@ -8,7 +8,7 @@ export const Container = styled.div`
 
 export const Sidebar = styled.aside`
 	height: 100%;
-	width: 12%;
+	width: 20%;
 	background-color: #68de5a;
 
 	div.logo {

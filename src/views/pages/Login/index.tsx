@@ -83,12 +83,12 @@ const Login = () => {
 								></Button>
 								<p className='link'>
 									<Link className='link' to='/recoveryPass'>
-										Esqueci minha senha{' '}
+										Esqueci minha senha{' > '}
 									</Link>
 								</p>
 								<p className='link2'>
 									<Link className='link' to='/'>
-										Ainda não sou cliente{' '}
+										Ainda não sou cliente{' > '}
 									</Link>
 								</p>
 							</form>

@@ -52,7 +52,7 @@ const Dashboard = () => {
 			.catch((e) => {
 				localStorage.clear();
 				toast.error(
-					'Sua sessão está inspirada., por favor faça o login novamente'
+					'Sua sessão está expirada. Por favor, faça o login novamente'
 				);
 				history.push('/login');
 			});

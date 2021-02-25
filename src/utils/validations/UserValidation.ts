@@ -5,7 +5,7 @@ export const UserSchema: any = yup.object().shape({
 		.string()
 		.min(11, 'O CPF deve ter 11 caracteres.')
 		.required('Por favor, insira seu CPF.'),
-	name: yup.string().required('Por favor, insira seu nome.'),
+	name: yup.string().required('Por favor, insira seu nome completo.'),
 	username: yup.string().required('Por favor, insira seu nome de usuário.'),
 	password: yup
 		.string()
