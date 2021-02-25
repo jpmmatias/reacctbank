@@ -37,3 +37,15 @@ export interface DadosUser {
 		lancamentos: any;
 	};
 }
+
+export interface IPlanoContaComponent{
+	login:string;
+}
+
+export interface IPlanoConta{
+	descricao:string,
+	id:number,
+	login:string,
+	padrao:boolean,
+	tipoMovimento:'R',
+}

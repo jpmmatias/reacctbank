@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { string } from 'yup/lib/locale';
+
 
 export const Container = styled.div`
 	flex: 1;
