@@ -8,11 +8,17 @@ import headers from '../../../services/headers';
 
 const PlanoConta:React.FC<IPlanoContaComponent> = ({login}:IPlanoContaComponent) => {
     const[planosConta, setPlanosConta] = useState<IPlanoConta[]>([])
-    const[novoPlano, setNovoPlano] = useState("")
+    const[novoPlano, setNovoPlano] = useState<IPlanoConta>({descricao:"", id:0, login: login, tipoMovimento:"", padrao:false})
+    const[sigla, setSigla] = useState("")
+    const[nome,setNome] = useState("")
 
     useEffect(()=>{
         loadPlanosConta()
     },[])
+
+    useEffect(()=>{
+        setNovoPlano({...novoPlano, tipoMovimento:sigla, descricao:nome})
+    },[sigla, nome])
 
     function loadPlanosConta(){
         api.get(`lancamentos/planos-conta?login=${login}`, headers)
@@ -24,18 +30,42 @@ const PlanoConta:React.FC<IPlanoContaComponent> = ({login}:IPlanoContaComponent)
         })
     }
 
+    function savePlanosConta() {
+         
+        let id = planosConta[planosConta.length-1].id+1;
+        let plano = {...novoPlano, id}
+        
+        api.post(`lancamentos/planos-conta`, plano, headers)
+        .then(res => {
+            console.log("Funcionou")
+        }).catch(err =>{
+            console.log("Falhou")
+        })
+    }
+
+
     return(
         <>
            <Container>
                 <Card>
                     <h1>Planos de Conta</h1>
                     <form>
-                        <label>Adicionar Novo:</label>
-                        <input type="text" value={novoPlano} onChange={(e) => setNovoPlano(e.target.value.toLocaleUpperCase())}/>
+                        <div>
+                            <label>Nome:</label>
+                            <input type="text" value={nome} onChange={(e) => setNome(e.target.value.toLocaleUpperCase())}/>
+                        </div>
+                        <div>
+                            <label>Sigla:</label>
+                            <input type="text" value={sigla} onChange={(e) => setSigla(e.target.value.toLocaleUpperCase())}/>
+                        </div>
+                        <button type="button" onClick={savePlanosConta}>Adicionar</button>
                     </form>
                     <ul>
                         {planosConta.map((planoConta, id)=>(
-                            <li key={id}>{planoConta.descricao}</li>
+                            <li key={id}>
+                                <p>{planoConta.descricao}</p>
+                                <p>({planoConta.tipoMovimento})</p>
+                            </li>
                         ))}
                         
                     </ul> 
