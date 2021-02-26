@@ -8,7 +8,7 @@ import dollar from '../../../assets/icons/dollar.svg';
 import cardCredit from '../../../assets/icons/credit-card.svg';
 import { Sidebar, Container, Content } from './style';
 import Lancamento from '../../components/Lançamento';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import jwt_decote from 'jwt-decode';
 import { toast } from 'react-toastify';
 import api from '../../../services/api';
@@ -60,15 +60,14 @@ const Dashboard = () => {
 			<Container>
 				<Sidebar>
 					<div className='logo'>
-							<img src={logo} alt='Gama Academy' />	
+						<Link className='link' to='/dashboard'>
+							<img src={logo} alt='Gama Academy' />
+						</Link>
 					</div>
 					<nav>
 						<ul>
 							<li>
-								<div role='button' onClick={() => setScreen("home")}>
-									<img src={pixImg} alt='Icone Pix' aria-hidden='true' />
-									<h1>Home</h1>
-								</div>
+
 							</li>
 							<li>
 								<div role='button' onClick={() => setScreen("depositos")}>
@@ -121,13 +120,14 @@ const Dashboard = () => {
 									<div className='cardContentMain'>
 										<h2>Saldo Disponivel</h2>
 										<span>R$: {dadosUser?.contaBanco.saldo}</span>
-			
+
 									</div>
 									<div className='cardContentTotal'>
 										<h2>Transações</h2>
 										<span>R$: {dadosUser?.contaBanco.lancamentos.
-										reduce((acc:LancamentoProps, currentValue:LancamentoProps)=>{
-											return acc.valor+currentValue.valor},0)
+											reduce((acc: LancamentoProps, currentValue: LancamentoProps) => {
+												return acc.valor + currentValue.valor
+											}, 0)
 										}
 										</span>
 									</div>
@@ -140,14 +140,15 @@ const Dashboard = () => {
 										<h1>Conta Crédito</h1>
 									</div>
 									<div className='cardContentMain'>
-										<h2>Saldo Disponivel</h2>
+										<h2>Fatura Atual</h2>
 										<span>R$: {dadosUser?.contaCredito.saldo}</span>
 									</div>
 									<div className='cardContentTotal'>
-										<h2>Transações</h2>
-										<span>{dadosUser?.contaCredito.lancamentos.
-										reduce((acc:LancamentoProps, currentValue:LancamentoProps)=>{
-											return acc.valor+currentValue.valor},0)
+										<h2>Limite Disponível</h2>
+										<span>R$: {dadosUser?.contaCredito.lancamentos.
+											reduce((acc: LancamentoProps, currentValue: LancamentoProps) => {
+												return acc.valor + currentValue.valor
+											}, 0)
 										}</span>
 									</div>
 								</Card>
