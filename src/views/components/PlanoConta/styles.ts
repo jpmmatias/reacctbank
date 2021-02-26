@@ -7,10 +7,21 @@ export const Container = styled.div`
         display:flex;
         flex-direction:row;
         margin-top:25px;
+        
 
         div{
+            display:flex;   
+            flex-direction:column;
             margin-right:30px;
             width:45%;
+
+            label{
+                margin-bottom: 10px;
+            }
+
+            select{
+                height:30px;
+            }
         }
 
         button{
@@ -26,10 +37,6 @@ export const Container = styled.div`
             }
         }
         
-        label{
-            margin-bottom:10px;
-        }
-        
         input{
             font-weight:10;
             width:100%;
@@ -40,7 +47,6 @@ export const Container = styled.div`
         margin-top:15px;
         list-style:none;
         
-
         li{
             display:flex;
             justify-content:center;

@@ -5,7 +5,11 @@ import { Container } from './styles';
 import {IPlanoConta} from '../../../types';
 import api from '../../../services/api';
 import headers from '../../../services/headers';
+
 import { useStore } from 'react-redux';
+
+import { toast } from 'react-toastify';
+
 
 const PlanoConta:React.FC = () => {
     const store = useStore()
@@ -43,8 +47,12 @@ const PlanoConta:React.FC = () => {
         api.post(`lancamentos/planos-conta`, plano, headers)
         .then(res => {
             console.log("Funcionou")
+            loadPlanosConta()
+            setNome("")
+            toast.success("Plano de Conta adicionado com sucesso!")
         }).catch(err =>{
             console.log("Falhou")
+            toast.error("Não foi possível adicionar o novo plano de contas.")
         })
     }
 
@@ -61,7 +69,17 @@ const PlanoConta:React.FC = () => {
                         </div>
                         <div>
                             <label>Sigla:</label>
-                            <input type="text" value={sigla} onChange={(e) => setSigla(e.target.value.toLocaleUpperCase())}/>
+                            <select onChange={(e)=>setSigla(e.target.value)}>
+                                {planosConta.map(planoConta => { 
+                                    if(planoConta.padrao){
+                                        return( 
+                                        <option value={planoConta.tipoMovimento}>
+                                            {planoConta.descricao} ({planoConta.tipoMovimento})
+                                        </option>
+                                        )
+                                    }     
+                                })}     
+                            </select>
                         </div>
                         <button type="button" onClick={savePlanosConta}>Adicionar</button>
                     </form>
