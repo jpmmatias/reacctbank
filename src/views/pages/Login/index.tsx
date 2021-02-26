@@ -47,7 +47,9 @@ const Login = () => {
 			<SectionHome background='purple'>
 				<ToastContainer />
 				<header>
+					<Link className='link' to='/'>
 					<img src={logo} alt='Gama Academy' />
+					</Link>
 				</header>
 				<div className='main'>
 					<div className='form'>

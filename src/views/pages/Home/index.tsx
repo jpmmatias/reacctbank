@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { UserSchema } from '../../../utils/validations/UserValidation';
 import Section from '../../components/Section';
 import logo from '../../../assets/images/logo.svg';
+import { Link } from 'react-router-dom';
 import arrowIcon from '../../../assets/icons/right-arrow 1.svg';
 import arrowIconBlue from '../../../assets/icons/right-arrow-blue.svg';
 import Card from '../../components/Card';
@@ -105,7 +106,9 @@ const Home: React.FC = () => {
 			<Section background='image' backgroundImage={happyImage}>
 				<ToastContainer />
 				<header>
+					<Link className='link' to='/'>
 					<img src={logo} alt='Gama Academy' />
+					</Link>
 				</header>
 				<div className='main'>
 					<div className='callToAction'>

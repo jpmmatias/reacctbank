@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import logo from '../../../assets/images/logo.svg';
+import {Link} from 'react-router-dom';
 import SectionHome from '../../components/Section';
 import Card from '../../components/Card';
 import Button from '../../components/Button';
@@ -56,7 +57,9 @@ const RecoveryPass = () => {
 			<ToastContainer />
 			<SectionHome background='purple'>
 				<header>
+					<Link className='link' to='/'>
 					<img src={logo} alt='Gama Academy' />
+					</Link>
 				</header>
 				<div className='main'>
 					<div className='form'>

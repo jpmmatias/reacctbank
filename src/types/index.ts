@@ -14,7 +14,7 @@ export interface User {
 	cpf:string,
 	id:number,
 	login:string,
-	nome:string,
+	name:string,
 	senha:string,
 	redefinirSenha:boolean,
 	senhaTemporaria:string,
@@ -48,6 +48,27 @@ export interface IPlanoContaComponent{
 }
 
 export interface IPlanoConta{
+	descricao:string,
+	id:number,
+	login:string,
+	padrao:boolean,
+	tipoMovimento:string,
+}
+export interface DepositoConta{
+	descricao:string,
+	id:number,
+	login:string,
+	padrao:boolean,
+	tipoMovimento:string,
+}
+export interface TransacoesConta{
+	descricao:string,
+	id:number,
+	login:string,
+	padrao:boolean,
+	tipoMovimento:string,
+}
+export interface PagamentoConta{
 	descricao:string,
 	id:number,
 	login:string,

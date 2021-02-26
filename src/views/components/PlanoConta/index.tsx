@@ -5,13 +5,15 @@ import { Container } from './styles';
 import {IPlanoConta} from '../../../types';
 import api from '../../../services/api';
 import headers from '../../../services/headers';
+import { IPlanoContaInfo } from '../../../store/modules/user/actions';
 
-import { useStore } from 'react-redux';
+import { useDispatch, useStore } from 'react-redux';
 
 import { toast } from 'react-toastify';
 
 
-const PlanoConta:React.FC = () => {
+const PlanoConta = () => {
+    const dispatch = useDispatch()
     const store = useStore()
     const user = store.getState().user
     
@@ -21,33 +23,39 @@ const PlanoConta:React.FC = () => {
     const[nome,setNome] = useState("")
 
     useEffect(()=>{
-        loadPlanosConta()
+        
+        const user = store.getState().user
+        api.get(`lancamentos/planos-conta?login=${user.login}`, headers)
+        .then((res) =>{
+            
+            dispatch(IPlanoContaInfo(res.data))
+            setPlanosConta(res.data)
+            console.log(res.data)
+            
+        }).catch((err) => {
+            console.log(err)
+        })
     },[])
 
     useEffect(()=>{
         setNovoPlano({...novoPlano, tipoMovimento:sigla, descricao:nome})
     },[sigla, nome])
 
-    function loadPlanosConta(){
-        const user = store.getState().user
-        api.get(`lancamentos/planos-conta?login=${user.login}`, headers)
-        .then((res) =>{
-            setPlanosConta(res.data)
-            console.log(res.data)
-        }).catch((err) => {
-            console.log(err)
-        })
-    }
+
+    
 
     function savePlanosConta() {
          
-        let id = planosConta[planosConta.length-1].id+1;
-        let plano = {...novoPlano, id}
-        
-        api.post(`lancamentos/planos-conta`, plano, headers)
+        //let id = planosConta[planosConta.length-1].id+1;
+        //let plano = {...novoPlano, id}
+        const user = store.getState().user
+        api.post(`lancamentos/planos-conta?login=${user.login}`, headers)
         .then(res => {
+            
+            dispatch(IPlanoContaInfo(res.data))
+            setPlanosConta(res.data)
             console.log("Funcionou")
-            loadPlanosConta()
+            
             setNome("")
             toast.success("Plano de Conta adicionado com sucesso!")
         }).catch(err =>{

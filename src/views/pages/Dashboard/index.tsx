@@ -13,6 +13,9 @@ import jwt_decote from 'jwt-decode';
 import { toast } from 'react-toastify';
 import api from '../../../services/api';
 import PlanoConta from '../../components/PlanoConta';
+import DepositoConta from '../../components/DepositoConta'
+import TransacoesConta from '../../components/TransacoesConta';
+import PagamentoConta from '../../components/PagamentoConta';
 import { DadosUser, User, LancamentoProps } from '../../../types';
 import { useDispatch, useStore } from 'react-redux';
 import { DadosUserInfo } from '../../../store/modules/user/actions';
@@ -57,36 +60,36 @@ const Dashboard = () => {
 			<Container>
 				<Sidebar>
 					<div className='logo'>
-						<img src={logo} alt='Gama Academy' />
+							<img src={logo} alt='Gama Academy' />	
 					</div>
 					<nav>
 						<ul>
 							<li>
-								<div role='button' onClick={()=>setScreen("home")}>
+								<div role='button' onClick={() => setScreen("home")}>
 									<img src={pixImg} alt='Icone Pix' aria-hidden='true' />
 									<h1>Home</h1>
 								</div>
 							</li>
 							<li>
-								<div role='button' onClick={()=>setScreen("deposito")}>
+								<div role='button' onClick={() => setScreen("depositos")}>
 									<img src={pixImg} alt='Icone Pix' aria-hidden='true' />
 									<h1>Depósitos</h1>
 								</div>
 							</li>
 							<li>
-								<div role='button' onClick={()=>setScreen("planos")}>
+								<div role='button' onClick={() => setScreen("planos")}>
 									<img src={pixImg} alt='Icone Pix' aria-hidden='true' />
 									<h1>Planos</h1>
 								</div>
 							</li>
 							<li>
-								<div role='button'>
+								<div role='button' onClick={() => setScreen("pagamentos")}>
 									<img src={pixImg} alt='Icone Pix' aria-hidden='true' />
 									<h1>Pagamentos</h1>
 								</div>
 							</li>
 							<li>
-								<div role='button'>
+								<div role='button' onClick={() => setScreen("transacoes")}>
 									<img src={pixImg} alt='Icone Pix' aria-hidden='true' />
 									<h1>Transações</h1>
 								</div>
@@ -96,90 +99,106 @@ const Dashboard = () => {
 				</Sidebar>
 				{screen === 'home' &&
 					<Content>
-					<div className='contentHead'>
-						<h1>
-							Olá <span>usuario</span>, seja bem vindo!
-						</h1>{' '}
-						<img src={hiddenImg} alt='Hidden' />
-					</div>
-					<div
-						style={{
-							display: 'flex',
-							justifyContent: 'space-between',
-							marginTop: '1.5%',
-						}}
-					>
-						<div style={{ width: '47%', display: 'flex', height: '3%' }}>
-							<Card>
-								<div className='cardContentTitle'>
-									<img src={dollar} alt='Dollar Icon' aria-hidden='true' />
-									<h1>Conta</h1>
-								</div>
-								<div className='cardContentMain'>
-									<h2>Saldo Disponivel</h2>
-									<span>R$: {dadosUser?.contaBanco.saldo}</span>
-								</div>
-								<div className='cardContentTotal'>
-									<h2>Transações</h2>
-									<span>R$: 2.120,21</span>
-								</div>
-							</Card>
+						<div className='contentHead'>
+							<h1>
+								Olá <span>{store.getState().user.nome}</span>, seja bem vindo!
+						</h1>{ }
+							<img src={hiddenImg} alt='Hidden' />
 						</div>
-						<div style={{ width: '47%', display: 'flex', height: '3%' }}>
+						<div
+							style={{
+								display: 'flex',
+								justifyContent: 'space-between',
+								marginTop: '1.5%',
+							}}
+						>
+							<div style={{ width: '47%', display: 'flex', height: '3%' }}>
+								<Card>
+									<div className='cardContentTitle'>
+										<img src={dollar} alt='Dollar Icon' aria-hidden='true' />
+										<h1>Conta</h1>
+									</div>
+									<div className='cardContentMain'>
+										<h2>Saldo Disponivel</h2>
+										<span>R$: {store.getState().dadosUser.contaBanco}</span>
+										{console.log(store.getState().dadosUser.contaBanco)}
+									</div>
+									<div className='cardContentTotal'>
+										<h2>Transações</h2>
+										<span>R$: {store.getState().dadosUser.transacoes}</span>
+									</div>
+								</Card>
+							</div>
+							<div style={{ width: '47%', display: 'flex', height: '3%' }}>
+								<Card>
+									<div className='cardContentTitle'>
+										<img src={cardCredit} alt='Dollar Icon' aria-hidden='true' />
+										<h1>Conta Crédito</h1>
+									</div>
+									<div className='cardContentMain'>
+										<h2>Saldo Disponivel</h2>
+										<span>R$: {store.getState().dadosUser.contaCredito}</span>
+									</div>
+									<div className='cardContentTotal'>
+										<h2>Transações</h2>
+										<span>R$: {store.getState().dadosUser.transacoes}</span>
+									</div>
+								</Card>
+							</div>
+						</div>
+						<div
+							style={{
+								width: '100%',
+								height: '48%',
+								display: 'flex',
+								marginTop: '3%',
+							}}
+						>
 							<Card>
 								<div className='cardContentTitle'>
 									<img src={cardCredit} alt='Dollar Icon' aria-hidden='true' />
-									<h1>Conta Crédito</h1>
+									<h1>Últimos lançamentos</h1>
 								</div>
-								<div className='cardContentMain'>
-									<h2>Saldo Disponivel</h2>
-									<span>R$: 10.000,00</span>
-								</div>
-								<div className='cardContentTotal'>
-									<h2>Transações</h2>
-									<span>R$: 2.120,21</span>
-								</div>
+								<ul className='lançamentos'>
+									{dadosUser?.contaBanco.lancamentos.lenght > 0 ? (
+										dadosUser?.contaBanco.lancamentos.forEach(
+											(lancamento: LancamentoProps) => {
+												return (
+													<Lancamento
+														descricao={lancamento.descricao}
+														contaDestino={lancamento.contaDestino}
+														valor={lancamento.valor}
+														data={lancamento.data}
+													/>
+												);
+											}
+										)
+									) : (
+											<h1>Ainda não fez nenhum lançamento</h1>
+										)}
+								</ul>
 							</Card>
 						</div>
-					</div>
-					<div
-						style={{
-							width: '100%',
-							height: '48%',
-							display: 'flex',
-							marginTop: '3%',
-						}}
-					>
-						<Card>
-							<div className='cardContentTitle'>
-								<img src={cardCredit} alt='Dollar Icon' aria-hidden='true' />
-								<h1>Últimos lançamentos</h1>
-							</div>
-							<ul className='lançamentos'>
-								{dadosUser?.contaBanco.lancamentos.lenght > 0 ? (
-									dadosUser?.contaBanco.lancamentos.forEach(
-										(lancamento: LancamentoProps) => {
-											return (
-												<Lancamento
-													descricao={lancamento.descricao}
-													contaDestino={lancamento.contaDestino}
-													valor={lancamento.valor}
-													data={lancamento.data}
-												/>
-											);
-										}
-									)
-								) : (
-									<h1>Ainda não fez nenhum lançamento</h1>
-								)}
-							</ul>
-						</Card>
-					</div>
-				</Content>
+					</Content>
 				}
 				{screen === 'planos' &&
 					<Content center>
-						<PlanoConta/>
+						<PlanoConta />
+					</Content>
+				}
+				{screen === 'depositos' &&
+					<Content center>
+						<DepositoConta />
+					</Content>
+				}
+				{screen === 'transacoes' &&
+					<Content center>
+						<TransacoesConta />
+					</Content>
+				}
+				{screen === 'pagamentos' &&
+					<Content center>
+						<PagamentoConta />
 					</Content>
 				}
 			</Container>
