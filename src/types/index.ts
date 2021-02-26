@@ -11,8 +11,13 @@ export interface Form {
 }
 
 export interface User {
-	idUsuario: number;
-	sub: string;
+	cpf:string,
+	id:number,
+	login:string,
+	nome:string,
+	senha:string,
+	redefinirSenha:boolean,
+	senhaTemporaria:string,
 }
 
 export interface LancamentoProps {
