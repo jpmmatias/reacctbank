@@ -41,7 +41,9 @@ const RecoveryPass = () => {
 			<ToastContainer />
 			<SectionHome background='purple'>
 				<header>
-					<img src={logo} alt='Gama Academy' />
+					<Link className='link' to='/'>
+						<img src={logo} alt='Gama Academy' />
+					</Link>
 				</header>
 				<div className='main'>
 					<div className='form'>

@@ -60,7 +60,7 @@ const Dashboard = () => {
 			<Container>
 				<Sidebar>
 					<div className='logo'>
-						<img src={logo} alt='Gama Academy' />
+							<img src={logo} alt='Gama Academy' />	
 					</div>
 					<nav>
 						<ul>
@@ -196,7 +196,7 @@ const Dashboard = () => {
 						<TransacoesConta />
 					</Content>
 				}
-					{screen === 'pagamentos' &&
+				{screen === 'pagamentos' &&
 					<Content center>
 						<PagamentoConta />
 					</Content>

@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from '../../../assets/images/logo.svg';
+import { Link } from 'react-router-dom';
 import warning from '../../../assets/images/warning.png';
 import Section from '../../components/Section';
 import CardError from '../../components/CardError';
@@ -11,7 +12,9 @@ const ErrorPage = () => {
 		<>
 			<Section background='purple'>
 				<header>
-					<img src={logo} alt='Gama Academy' />
+					<Link className='link' to='/'>
+						<img src={logo} alt='Gama Academy' />
+					</Link>
 				</header>
 				<div className='main'>
 					<div className='form'>
