@@ -1,4 +1,4 @@
-import { User, DadosUser } from '../../../types';
+import { User, DadosUser, IPlanoConta} from '../../../types';
 
 export function UserInfo(user: User) {
   return {
@@ -14,6 +14,15 @@ export function DadosUserInfo (dadosUser:DadosUser){
     type:"ADD_DADOS_USER",
     payload:{
       dadosUser
+    }
+  }
+}
+
+export function IPlanoContaInfo (IPlanoConta:IPlanoConta){
+  return{
+    type:"ADD_IPLANO_CONTA",
+    payload:{
+      IPlanoConta
     }
   }
 }
