@@ -11,10 +11,7 @@ const TransacoesConta = () => {
         <Container>
             <Card>
                 <h1>Minhas Transações</h1>
-                <p>Movimentação no valor de: R$ 5000,00</p>
-                <p>Movimentação no valor de: R$ 5000,00</p>
-                <p>Movimentação no valor de: R$ 5000,00</p>
-                <p>Movimentação no valor de: R$ 5000,00</p>
+                
             </Card>
         </Container>
     )

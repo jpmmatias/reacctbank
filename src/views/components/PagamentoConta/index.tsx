@@ -10,11 +10,8 @@ const PagamentoConta = () => {
     return (
         <Container>
             <Card>
-                <h1>Meus Pagamentos</h1>
-                <p>Pagamento no valor de: R$ 5000,00</p>
-                <p>Pagamento no valor de: R$ 5000,00</p>
-                <p>Pagamento no valor de: R$ 5000,00</p>
-                <p>Pagamento no valor de: R$ 5000,00</p>
+                <h1>Pagamentos</h1>
+               
             </Card>
         </Container>
     )

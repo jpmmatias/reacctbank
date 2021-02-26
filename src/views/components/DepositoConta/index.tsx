@@ -11,10 +11,8 @@ const DepositoConta = () => {
         
             <Container>
                 <Card>
-                    <h1>Meus Depósitos</h1>
-                    <p>Depósito de: R$1000,00</p>
-                    <p>Depósito de: R$1000,00</p>
-                    <p>Depósito de: R$8000,00</p>
+                    <h1>Depósitos</h1>
+                    
                 </Card>
             </Container>
         
