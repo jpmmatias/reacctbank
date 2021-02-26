@@ -2,13 +2,17 @@ import React, { useEffect, useState } from 'react';
 import '../Card';
 import Card from '../Card';
 import { Container } from './styles';
-import {IPlanoContaComponent, IPlanoConta} from '../../../types';
+import {IPlanoConta} from '../../../types';
 import api from '../../../services/api';
 import headers from '../../../services/headers';
+import { useStore } from 'react-redux';
 
-const PlanoConta:React.FC<IPlanoContaComponent> = ({login}:IPlanoContaComponent) => {
+const PlanoConta:React.FC = () => {
+    const store = useStore()
+    const user = store.getState().user
+    
     const[planosConta, setPlanosConta] = useState<IPlanoConta[]>([])
-    const[novoPlano, setNovoPlano] = useState<IPlanoConta>({descricao:"", id:0, login: login, tipoMovimento:"", padrao:false})
+    const[novoPlano, setNovoPlano] = useState<IPlanoConta>({descricao:"", id:0, login: user.login, tipoMovimento:"", padrao:false})
     const[sigla, setSigla] = useState("")
     const[nome,setNome] = useState("")
 
@@ -21,7 +25,8 @@ const PlanoConta:React.FC<IPlanoContaComponent> = ({login}:IPlanoContaComponent)
     },[sigla, nome])
 
     function loadPlanosConta(){
-        api.get(`lancamentos/planos-conta?login=${login}`, headers)
+        const user = store.getState().user
+        api.get(`lancamentos/planos-conta?login=${user.login}`, headers)
         .then((res) =>{
             setPlanosConta(res.data)
             console.log(res.data)

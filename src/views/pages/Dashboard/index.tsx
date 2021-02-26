@@ -176,7 +176,7 @@ const Dashboard = () => {
 				}
 				{screen === 'planos' &&
 					<Content center>
-						<PlanoConta login={'chris'}/>
+						<PlanoConta/>
 					</Content>
 				}
 			</Container>
