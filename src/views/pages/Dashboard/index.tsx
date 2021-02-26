@@ -14,11 +14,13 @@ import { toast } from 'react-toastify';
 import api from '../../../services/api';
 import PlanoConta from '../../components/PlanoConta';
 import { DadosUser, User, LancamentoProps } from '../../../types';
-import { useStore } from 'react-redux';
+import { useDispatch, useStore } from 'react-redux';
+import { DadosUserInfo } from '../../../store/modules/user/actions';
 
 
 const Dashboard = () => {
 	const store = useStore()
+	const dispatch = useDispatch()
 
 	const [dadosUser, setDadosUser] = useState<DadosUser>();
 	const [screen, setScreen] = useState("home");
@@ -38,6 +40,7 @@ const Dashboard = () => {
 			})
 			.then((res) => {
 				setDadosUser(res.data);
+				dispatch(DadosUserInfo(res.data))
 			})
 			.catch((e) => {
 				localStorage.clear();

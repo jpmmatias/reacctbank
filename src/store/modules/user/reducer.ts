@@ -3,13 +3,15 @@ import { Reducer } from 'redux'
 
 interface IState {
   user: User,
+  dadosUser:DadosUser,
 }
 
 const INITIAL_STATE = {
-  user: {}
+  user: {},
+  dadosUser:{}
 }
 
-const Users: Reducer<User | any> = (state = INITIAL_STATE, action) => {
+ const Users: Reducer<IState | any> = (state = INITIAL_STATE, action) => {
   switch(action.type) {
     case 'ADD_USER':
       const { user } = action.payload
@@ -18,7 +20,13 @@ const Users: Reducer<User | any> = (state = INITIAL_STATE, action) => {
           ...state,
           user
         }
-
+      case "ADD_DADOS_USER":
+        const {dadosUser} = action.payload
+        console.log(action.payload)
+        return{
+          ...state,
+          dadosUser
+        }
       default: {
         return state
       }
