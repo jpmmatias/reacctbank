@@ -41,25 +41,19 @@ const PlanoConta = () => {
         setNovoPlano({...novoPlano, tipoMovimento:sigla, descricao:nome})
     },[sigla, nome])
 
-
-    
-
     function savePlanosConta() {
          
-        //let id = planosConta[planosConta.length-1].id+1;
-        //let plano = {...novoPlano, id}
+        let id = planosConta[planosConta.length-1].id+1;
+        let plano = {...novoPlano, id}
+        console.log(plano)
         const user = store.getState().user
-        api.post(`lancamentos/planos-conta?login=${user.login}`, headers)
+        api.post(`lancamentos/planos-conta?login=${user.login}`,plano, headers)
         .then(res => {
-            
-            dispatch(IPlanoContaInfo(res.data))
-            setPlanosConta(res.data)
-            console.log("Funcionou")
-            
+            dispatch(IPlanoContaInfo(plano))
+            setPlanosConta([...planosConta, plano])
             setNome("")
             toast.success("Plano de Conta adicionado com sucesso!")
         }).catch(err =>{
-            console.log("Falhou")
             toast.error("Não foi possível adicionar o novo plano de contas.")
         })
     }
