@@ -16,7 +16,7 @@ import PlanoConta from '../../components/PlanoConta';
 import DepositoConta from '../../components/DepositoConta'
 import TransacoesConta from '../../components/TransacoesConta';
 import PagamentoConta from '../../components/PagamentoConta';
-import { DadosUser, User, LancamentoProps } from '../../../types';
+import { DadosUser, LancamentoProps } from '../../../types';
 import { useDispatch, useStore } from 'react-redux';
 import { DadosUserInfo } from '../../../store/modules/user/actions';
 
@@ -120,12 +120,16 @@ const Dashboard = () => {
 									</div>
 									<div className='cardContentMain'>
 										<h2>Saldo Disponivel</h2>
-										<span>R$: {store.getState().dadosUser.contaBanco}</span>
-										{console.log(store.getState().dadosUser.contaBanco)}
+										<span>R$: {dadosUser?.contaBanco.saldo}</span>
+			
 									</div>
 									<div className='cardContentTotal'>
 										<h2>Transações</h2>
-										<span>R$: {store.getState().dadosUser.transacoes}</span>
+										<span>R$: {dadosUser?.contaBanco.lancamentos.
+										reduce((acc:LancamentoProps, currentValue:LancamentoProps)=>{
+											return acc.valor+currentValue.valor},0)
+										}
+										</span>
 									</div>
 								</Card>
 							</div>
@@ -137,11 +141,14 @@ const Dashboard = () => {
 									</div>
 									<div className='cardContentMain'>
 										<h2>Saldo Disponivel</h2>
-										<span>R$: {store.getState().dadosUser.contaCredito}</span>
+										<span>R$: {dadosUser?.contaCredito.saldo}</span>
 									</div>
 									<div className='cardContentTotal'>
 										<h2>Transações</h2>
-										<span>R$: {store.getState().dadosUser.transacoes}</span>
+										<span>{dadosUser?.contaCredito.lancamentos.
+										reduce((acc:LancamentoProps, currentValue:LancamentoProps)=>{
+											return acc.valor+currentValue.valor},0)
+										}</span>
 									</div>
 								</Card>
 							</div>
