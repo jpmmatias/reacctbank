@@ -13,34 +13,24 @@ import jwt_decote from 'jwt-decode';
 import { toast } from 'react-toastify';
 import api from '../../../services/api';
 import PlanoConta from '../../components/PlanoConta';
-
 import { DadosUser, User, LancamentoProps } from '../../../types';
+import { useStore } from 'react-redux';
 
 
 const Dashboard = () => {
+	const store = useStore()
+
 	const [dadosUser, setDadosUser] = useState<DadosUser>();
-	const [screen, setScreen] = useState("planos");
+	const [screen, setScreen] = useState("home");
 
 	const history = useHistory();
 
 	const TokenStorage = null || localStorage.getItem('@tokenApp');
 
-	const TokenDecodedValue = () => {
-		if (TokenStorage) {
-			const TokenArr = TokenStorage.split(' ');
-			const TokenDecode = TokenArr[1];
-			const decoded = jwt_decote<User>(TokenDecode);
-			return decoded.sub;
-		} else {
-			alert('err');
-		}
-	};
-
-	const tester = TokenDecodedValue();
-
 	useEffect(() => {
+		const user = store.getState().user
 		api
-			.get(`dashboard?fim=2021-02-18&inicio=2021-02-18&login=${tester}`, {
+			.get(`dashboard?fim=2021-02-18&inicio=2021-02-18&login=${user.login}`, {
 				headers: {
 					'Content-Type': 'application/json',
 					Authorization: localStorage.getItem('@tokenApp'),
@@ -186,7 +176,7 @@ const Dashboard = () => {
 				}
 				{screen === 'planos' &&
 					<Content center>
-						<PlanoConta login={tester ? tester : ""}/>
+						<PlanoConta login={'chris'}/>
 					</Content>
 				}
 			</Container>
