@@ -37,6 +37,7 @@ const Login = () => {
 				localStorage.setItem('@tokenApp', res.data.token);
 				history.push('/dashboard');
 				dispatch(UserInfo(res.data.usuario))
+				console.log(res.data)
 			})
 			.catch((err) => {
 				toast.error(err.message);
