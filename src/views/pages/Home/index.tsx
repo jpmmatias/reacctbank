@@ -23,6 +23,8 @@ import { Input, InputMessage } from './style';
 
 import { Form } from '../../../types';
 
+import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
+
 const Home: React.FC = () => {
 	const intialState = {
 		cpf: '',
@@ -40,6 +42,7 @@ const Home: React.FC = () => {
 	const [redirectLogin, setRedirectLogin] = useState(false);
 	const [errors, setErrors] = useState<Form>(intialState);
 	const [form, setForm] = useState<Form>(intialState);
+	const { height, width } = useWindowDimensions();
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -107,7 +110,7 @@ const Home: React.FC = () => {
 				<ToastContainer />
 				<header>
 					<Link className='link' to='/'>
-					<img src={logo} alt='Gama Academy' />
+						<img src={logo} alt='Gama Academy' />
 					</Link>
 				</header>
 				<div className='main'>
@@ -220,7 +223,7 @@ const Home: React.FC = () => {
 									backgroundColorHover='#8C52E5'
 									textColorHover='#fff'
 									icon={arrowIcon}
-									widthSize={276.74}
+									widthSize={width <= 1024 ? 240 : 276.7}
 									heightSize={47.66}
 									type='submit'
 								></Button>
@@ -231,7 +234,6 @@ const Home: React.FC = () => {
 			</Section>
 			<Section background='gray'>
 				<div className='secondSection'>
-
 					<div className='phoneSection'>
 						<h1>Conta digital do Gama Academy</h1>
 						<img src={phoneImage} alt='Apl' />
@@ -256,7 +258,6 @@ const Home: React.FC = () => {
 						</div>
 					</div>
 				</div>
-        
 			</Section>
 			<Section background='purple'>
 				<div className='thirdSection'>

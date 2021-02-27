@@ -14,26 +14,30 @@ export const Container = styled.section<sectionProps>`
 	background-attachment: fixed;
 	background-position: center;
 	background-repeat: no-repeat;
-  background-size: cover;
+	background-size: cover;
 	background-color: ${(props) =>
 		props.background === 'purple' ? '#8C52E5' : '#EAEAEA'};
-    
+
 	header {
 		height: 10%;
-    margin: 30px 45px;
+		margin: 30px 45px;
+		@media (max-width: 618px) {
+			margin: 20px 25px;
+		}
 	}
 
 	.main {
 		display: flex;
 		justify-content: space-around;
-		height: 700px;
+		height: 70%;
 		z-index: -1;
 
-    @media(max-width: 618px) {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+		@media (max-width: 618px) {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			height: auto;
+		}
 
 		.callToAction {
 			z-index: 3;
@@ -41,18 +45,21 @@ export const Container = styled.section<sectionProps>`
 			flex-direction: column;
 			justify-content: center;
 			width: 281px;
+			margin-bottom: 4%;
 
 			p {
 				color: #fff;
 				font-size: 26px;
 				margin-bottom: 12px;
-      }
+			}
 
-      @media(max-width: 618px) {
-        p {
-          font-size: 18px;
-        }
-      }
+			@media (max-width: 618px) {
+				width: auto;
+				p {
+					font-size: 18px;
+					margin-bottom: 4px;
+				}
+			}
 		}
 
 		.form {
@@ -63,30 +70,65 @@ export const Container = styled.section<sectionProps>`
 			justify-content: center;
 			width: 349px;
 			height: 400px;
+			@media (max-width: 1024px) {
+				width: 300px;
+				height: 70%;
+				margin: 0;
+			}
+			@media (max-width: 618px) {
+				width: 70%;
+				div {
+					margin-bottom: 15px;
+				}
+			}
 		}
 	}
 
 	.secondSection {
-    display: flex;
+		display: flex;
 		height: 100%;
 
-    @media(max-width: 1024px) {
-      display: flex;
-      flex-direction: column;
+		@media (max-width: 1024px) {
+			display: flex;
+			flex-direction: column;
+			.phoneSection {
+				height: 50%;
+				&:first-of-type {
+					h1 {
+						font-size: 28px !important;
+						margin: 1rem 0 !important;
+					}
+					img {
+						height: 150px !important;
+						width: 150px !important;
+					}
+				}
 
-      p {
-        font-size: 1.1em;
-        margin-bottom: 20px;
-      }
-    }
+				&:last-of-type {
+					h1 {
+						font-size: 28px !important;
+						margin: 1rem 0 !important;
+					}
+					img {
+						height: 150px !important;
+						width: 150px !important;
+					}
+				}
+
+				p {
+					font-size: 1.1em;
+					margin-bottom: 20px;
+				}
+			}
+		}
 
 		.phoneSection {
 			flex: 1;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+			text-align: center;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
 
 			&:first-of-type {
 				color: #68de5a;
@@ -96,12 +138,12 @@ export const Container = styled.section<sectionProps>`
 					text-align: center;
 					font-size: 34px;
 					font-weight: 500;
-          margin: 3rem 3rem 3rem 7rem;
+					margin: 3rem 3rem 3rem 7rem;
 				}
 
 				img {
 					height: 350px;
-          width: 350px;
+					width: 350px;
 				}
 
 				.paragraphwrapper {
@@ -111,32 +153,32 @@ export const Container = styled.section<sectionProps>`
 					p {
 						font-size: 18px;
 						font-weight: 400;
-            margin-top: 25px;
+						margin-top: 25px;
 					}
 				}
 			}
 
 			&:last-of-type {
-				color: #1D1D1D;
-				background-color: #F8F8F8;
+				color: #1d1d1d;
+				background-color: #f8f8f8;
 
 				h1 {
 					text-align: center;
 					font-size: 34px;
 					font-weight: 500;
-          margin: 3rem 3rem 3rem 7rem;
+					margin: 3rem 3rem 3rem 7rem;
 				}
 
 				img {
 					height: 350px;
-          width: 350px;
+					width: 350px;
 				}
 
 				.paragraphwrapper {
 					p {
 						font-size: 18px;
 						font-weight: 400;
-            margin-top: 25px;
+						margin-top: 25px;
 					}
 				}
 			}
@@ -145,13 +187,15 @@ export const Container = styled.section<sectionProps>`
 	.thirdSection {
 		display: flex;
 		height: 100%;
-    
-    @media(max-width: 618px) {
-      display: flex;
-      flex-direction: column;
-      margin-top: 2.5rem;
-      text-align: center;
-    }
+
+		@media (max-width: 618px) {
+			display: flex;
+			flex-direction: column;
+			margin-top: 2.5rem;
+			text-align: center;
+			justify-content: space-around;
+			height: 80%;
+		}
 
 		.divisor {
 			display: flex;
@@ -166,12 +210,15 @@ export const Container = styled.section<sectionProps>`
 						font-size: 38px;
 						font-weight: 700;
 						margin-bottom: 32px;
-            text-align: center;
+						text-align: center;
 					}
 				}
-        p {
-          font-size: 18px;
-        }
+				p {
+					font-size: 18px;
+					@media (max-width: 618px) {
+						padding: 0 10%;
+					}
+				}
 			}
 
 			&:last-of-type {
@@ -187,9 +234,10 @@ export const Container = styled.section<sectionProps>`
 		display: flex;
 		align-items: center;
 		justify-content: center;
-    background-color: ${(props) =>
-		props.background === 'gray' ? '#EAEAEA' : '#8C52E5'};
-    background-size: cover;
+		background-color: ${(props) =>
+			props.background === 'gray' ? '#EAEAEA' : '#8C52E5'};
+		background-size: cover;
+		
 
 		div {
 			width: 459px;
@@ -198,10 +246,22 @@ export const Container = styled.section<sectionProps>`
 				font-weight: bold;
 				font-size: 42px;
 				margin-bottom: 36px;
+				padding:0 5%;
+				@media (max-width: 618px) {
+					font-weight: bold;
+					font-size: 32px;;
+					margin-bottom: 36px;
+					word-break:break-all
+				}
+			}
+		}
 			}
 			p {
 				font-weight: 500;
 				font-size: 23px;
+				padding:0 5%;
+				@media (max-width: 618px) {
+					font-size: 18px;
 			}
 		}
 	}
@@ -210,6 +270,9 @@ export const Container = styled.section<sectionProps>`
 		justify-content: center;
 		align-items: center;
 		height: 100%;
+		@media (max-width: 618px) {
+					flex-direction:column
+			}
 		.imageWrapper,
 		.content {
 			width: 100%;
@@ -227,8 +290,10 @@ export const Container = styled.section<sectionProps>`
 			display: flex;
 			justify-content: center;
 			align-items: center;
+
 			.contentWrapper {
 				width: 444px;
+		
 				h1 {
 					font-weight: bold;
 					font-size: 42px;
@@ -236,11 +301,20 @@ export const Container = styled.section<sectionProps>`
 					padding-right: 30px;
 					margin-bottom: 15px;
 					margin-bottom: 40px;
+					padding: 0 5%;
+					@media (max-width: 618px) {
+				text-align:center;
+			
+			}
 				}
 				p {
 					font-weight: 300;
 					font-size: 14px;
 					margin-bottom: 15px;
+					padding: 0 5%;
+					@media (max-width: 618px) {
+			text-align:center;
+			}
 				}
 			}
 		}
@@ -281,4 +355,3 @@ export const Container = styled.section<sectionProps>`
 		line-height: 15, 23px;
 	}
 `;
-

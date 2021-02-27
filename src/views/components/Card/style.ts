@@ -1,15 +1,13 @@
 import styled from 'styled-components';
-import { string } from 'yup/lib/locale';
-
 
 export const Container = styled.div`
-
-  @media(max-width: 618px) {
-    background-color: none;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
+	@media (max-width: 618px) {
+		background-color: none;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: center;
+	}
 
 	flex: 1;
 	background-color: #fbfbfb;
@@ -22,6 +20,10 @@ export const Container = styled.div`
 		font-weight: 700;
 		margin-bottom: 30px;
 		text-align: center;
+		@media (max-width: 618px) {
+			margin-bottom: 10px;
+			font-size: 16px;
+		}
 	}
 
 	form {
@@ -35,6 +37,9 @@ export const Container = styled.div`
 			padding: 5px;
 			font-weight: 600;
 			margin-bottom: 30px;
+			@media (max-width: 618px) {
+				margin-bottom: 20px;
+			}
 			&::placeholder {
 				font-size: 12px;
 				color: #878686;
