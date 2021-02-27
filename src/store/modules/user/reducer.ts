@@ -1,22 +1,24 @@
-import { IToken, Form, User, LancamentoProps, DadosUser, IPlanoContaComponent, IPlanoConta, IDepositoConta} from '../../../types/index'
+import { IToken, Form, User, LancamentoProps, DadosUser, IPlanoContaComponent, IPlanoConta, IDepositoConta, IPagamentoConta } from '../../../types/index'
 import { Reducer } from 'redux'
 
 interface IState {
   user: User,
-  dadosUser:DadosUser,
+  dadosUser: DadosUser,
   PlanosConta: IPlanoConta[],
   DepositoConta: IDepositoConta[],
+  PagamentoConta: IPagamentoConta[]
 }
 
 const INITIAL_STATE = {
   user: {},
-  dadosUser:{},
+  dadosUser: {},
   PlanosConta: [],
-  DepositosConta:{}
+  DepositosConta: {},
+  PagamentosConta:{}
 }
 
- const Users: Reducer<IState | any> = (state = INITIAL_STATE, action) => {
-  switch(action.type) {
+const Users: Reducer<IState | any> = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
     case 'ADD_USER':
       const { user } = action.payload
         console.log(action.payload)
@@ -63,12 +65,22 @@ const INITIAL_STATE = {
 
         }
 
+    case "ADD_PAGAMENTO_CONTA":
+      const { PagamentoConta } = action.payload
+      console.log(state)
+      return {
+        ...state,
+        PagamentosConta: [
+          ...state.PagamentosConta,
+          PagamentoConta
+        ]
+      }
 
 
       default: {
-        return state
+          return state
+        }
       }
   }
-}
 
-export default Users
+  export default Users
