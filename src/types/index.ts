@@ -71,10 +71,17 @@ export interface TransacoesConta{
 	padrao:boolean,
 	tipoMovimento:string,
 }
-export interface PagamentoConta{
+export interface IPagamentoConta{
+	//descricao:string,
+	//id:number,
+	//login:string,
+	//padrao:boolean,
+	//tipoMovimento:string,
+	conta:number;
+	contaDestino:string,
+	data:string,
 	descricao:string,
-	id:number,
 	login:string,
-	padrao:boolean,
-	tipoMovimento:string,
+	planoConta:number,
+	valor: number
 }
