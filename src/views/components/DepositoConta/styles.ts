@@ -10,20 +10,14 @@ export const Container = styled.div`
         flex-direction:row;
         margin-top:25px;
         
+        .grid-container {
+            display: grid;
+            grid-template-columns: auto auto;
+            padding: 10px;
+        }
 
-        div{
-            display:flex;   
-            flex-direction:column;
-            margin-right:30px;
-            width:45%;
-
-            label{
-                margin-bottom: 10px;
-            }
-
-            select{
-                height:30px;
-            }
+        .grid-item{
+            padding: 20px;
         }
 
         button{
