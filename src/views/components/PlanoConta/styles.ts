@@ -2,12 +2,12 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
 	width: 50%;
-	@media (max-width: 414px) {
-		width: 100%;
-	}
 
 	@media (max-width: 1024px) {
-		width: 80%;
+		width: 90%;
+	}
+	@media (max-width: 414px) {
+		width: 100% !important;
 	}
 
 	form {
@@ -76,7 +76,7 @@ export const Container = styled.div`
 				font-size: 20px;
 			}
 			@media (max-width: 414px) {
-				font-size: 18px;
+				font-size: 14px;
 			}
 		}
 	}
