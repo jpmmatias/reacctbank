@@ -20,7 +20,8 @@ import TransacoesConta from '../../components/TransacoesConta';
 import PagamentoConta from '../../components/PagamentoConta';
 import { DadosUser, LancamentoProps } from '../../../types';
 import { useDispatch, useStore } from 'react-redux';
-import { DadosUserInfo } from '../../../store/modules/user/actions';
+import { AddPlanosConta, DadosUserInfo, PlanoContaInfo } from '../../../store/modules/user/actions';
+import headers from '../../../services/headers';
 
 const Dashboard = () => {
 	const store = useStore();
@@ -33,6 +34,7 @@ const Dashboard = () => {
 
 	const TokenStorage = null || localStorage.getItem('@tokenApp');
 
+	//carrega informações da dashboard no redux
 	useEffect(() => {
 		const user = store.getState().user;
 		api
@@ -54,6 +56,22 @@ const Dashboard = () => {
 				history.push('/login');
 			});
 	}, []);
+
+	//carrega os planos de conta no redux
+	useEffect(()=>{
+        const user = store.getState().user
+        api.get(`lancamentos/planos-conta?login=${user.login}`, {
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: localStorage.getItem('@tokenApp'),
+			},
+		})
+        .then((res) =>{    
+            dispatch(AddPlanosConta(res.data)) 
+        }).catch((err) => {
+            console.log(err)
+        })
+    },[])
 
 	return (
 		<Section background='purple'>

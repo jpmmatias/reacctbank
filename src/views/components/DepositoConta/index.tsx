@@ -2,22 +2,21 @@ import React, { useEffect, useState } from 'react';
 import Card from '../Card';
 import { Container } from './styles';
 import { useDispatch, useStore } from 'react-redux';
-import { IDepositoConta } from '../../../types';
+import { IDepositoConta, IPlanoConta, User } from '../../../types';
 import { DepositoContaInfo } from '../../../store/modules/user/actions';
 
 
 const DepositoConta = () => {
     const dispatch = useDispatch()
     const store = useStore()
-    const user = store.getState().user
+    const planosConta:IPlanoConta[] = store.getState().PlanosConta
 
     //const[DepositoConta, setDepositoConta] = useState<IDepositoConta[]>([])
     const [valor, setValor] = useState(0)
     const [contaDestino, setContaDestino] = useState('')
     const [data, setData] = useState('')
     const [descricao, setDescricao] = useState('')
-    const [tipoDeposito, setTipoDeposito] = useState('')
-    //console.log(tipoDeposito)
+    const [planoConta, setPlanoConta] = useState(0)
     const [novoDeposito, setNovoDeposito] = useState<IDepositoConta>({
         conta: 0, contaDestino: "", data: "", descricao: "",
         login: "", planoConta: 0, valor: 0
@@ -28,7 +27,12 @@ const DepositoConta = () => {
         setNovoDeposito({ ...novoDeposito, [campo]: value })
     }
 
+    function deposito(){
+        let user:User = store.getState().user
+        setNovoDeposito({...novoDeposito, login: user.login })
+    }
 
+    console.log(planosConta)
 
     return (
 
@@ -39,26 +43,27 @@ const DepositoConta = () => {
                 <form>
                     <div>
                         <label>Valor: </label>
-                        <input type="number" value={valor} onChange={(e) => handleChange(setValor, parseInt(e.target.value), "valor")} />
+                        <input type="number" value={valor} onChange={(e) => handleChange(setValor, parseFloat(e.target.value), "valor")} />
                         <label>Conta de destino: </label>
                         <input type="text" value={contaDestino} onChange={(e) => handleChange(setContaDestino, e.target.value, "contaDestino")} />
                         <label>Data: </label>
                         <input type="date" value={data} onChange={(e) =>handleChange( setData, e.target.value, "data")} />
-                        <label>Descrição: </label>
-                        <input type="text" value={descricao} onChange={(e) =>handleChange(setDescricao, e.target.value, "descricao")} />
                     </div>
                     <div>
-                        <label>Tipo de depósito: </label>
-                        <select onChange={(e) => setTipoDeposito(e.target.value)}>
-
-                            <option value="Depósito1">Depósito em conta corrente</option>
-                            <option value="Depósito2">Depósito em conta corrente</option>
-                            <option value="Depósito3">Depósito em conta corrente</option>
-                            <option value="Depósito4"></option>
-
+                        <label>Tipos de Depósito: </label>
+                        <select onChange={(e) => handleChange(setDescricao, e.target.value, "descricao")}>
+                            <option value="DEPOSITO_CC">Depósito em Conta Corrente</option>
+                            <option value="DEPOSITO_P">Depósito em Conta Poupança</option>
                         </select>
                     </div>
-                    <button type="button">Adicionar</button>
+                    <div>
+                        <label>Tipos de Plano de Contas: </label>
+                        <select onChange={(e) => handleChange(setDescricao, e.target.value, "descricao")}>
+                            <option value="DEPOSITO_CC">Depósito em Conta Corrente</option>
+                            <option value="DEPOSITO_P">Depósito em Conta Poupança</option>
+                        </select>
+                    </div>
+                    <button type="button">Realizar Depósito</button>
                 </form>
 
             </Card>

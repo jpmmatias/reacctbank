@@ -27,6 +27,15 @@ export function PlanoContaInfo (PlanoConta: IPlanoConta){
   }
 }
 
+export function AddPlanosConta(PlanosConta:IPlanoConta[]){
+  return{
+    type:"ADD_PLANOS_CONTA",
+    payload:{
+      PlanosConta
+    }
+  }
+}
+
 export function DepositoContaInfo (DepositoConta: IDepositoConta){
   return{
     type:"ADD_DEPOSITO_CONTA",

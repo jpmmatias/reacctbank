@@ -17,29 +17,17 @@ const PlanoConta = () => {
     const store = useStore()
     const user = store.getState().user
     
-    const[planosConta, setPlanosConta] = useState<IPlanoConta[]>([])
+    
+    const[planosConta, setPlanosConta] = useState<IPlanoConta[]>(store.getState().PlanosConta)
     const[novoPlano, setNovoPlano] = useState<IPlanoConta>({descricao:"", id:0, login: user.login, tipoMovimento:"", padrao:false})
     const[sigla, setSigla] = useState("")
     const[nome,setNome] = useState("")
 
     useEffect(()=>{
-        
-        const user = store.getState().user
-        api.get(`lancamentos/planos-conta?login=${user.login}`, headers)
-        .then((res) =>{
-            
-            dispatch(PlanoContaInfo(res.data))
-            setPlanosConta(res.data)
-            console.log(res.data)
-            
-        }).catch((err) => {
-            console.log(err)
-        })
-    },[])
-
-    useEffect(()=>{
         setNovoPlano({...novoPlano, tipoMovimento:sigla, descricao:nome})
     },[sigla, nome])
+
+    console.log(store.getState())
 
     function savePlanosConta() {
          
