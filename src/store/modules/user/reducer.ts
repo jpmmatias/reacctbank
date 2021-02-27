@@ -4,15 +4,15 @@ import { Reducer } from 'redux'
 interface IState {
   user: User,
   dadosUser:DadosUser,
-  IPlanoConta: IPlanoConta[],
-  DepositoConta: IDepositoConta
+  PlanosConta: IPlanoConta[],
+  DepositoConta: IDepositoConta[],
 }
 
 const INITIAL_STATE = {
   user: {},
   dadosUser:{},
-  IPlanoConta: [],
-  DepositoConta:{}
+  PlanosConta: [],
+  DepositosConta:{}
 }
 
  const Users: Reducer<IState | any> = (state = INITIAL_STATE, action) => {
@@ -32,19 +32,22 @@ const INITIAL_STATE = {
           dadosUser
         }
         case "ADD_IPLANO_CONTA":
-        const {IPlanoConta} = action.payload
-        console.log(action.payload)
+        const {PlanoConta} = action.payload
+        console.log(state)
         return{
           ...state,
-          IPlanoConta
+          PlanosConta:[
+            ...state.PlanosConta,
+            PlanoConta
+          ]
         }
         case "ADD_DEPOSITO_CONTA":
         const {DepositoConta} = action.payload
         console.log(state)
         return{
           ...state,
-          DepositoConta:[
-            ...state.DepositoConta,
+          DepositosConta:[
+            ...state.DepositosConta,
             DepositoConta
           ] 
 

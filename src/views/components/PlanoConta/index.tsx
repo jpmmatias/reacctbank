@@ -5,7 +5,7 @@ import { Container } from './styles';
 import {IPlanoConta} from '../../../types';
 import api from '../../../services/api';
 import headers from '../../../services/headers';
-import { IPlanoContaInfo } from '../../../store/modules/user/actions';
+import { PlanoContaInfo } from '../../../store/modules/user/actions';
 
 import { useDispatch, useStore } from 'react-redux';
 
@@ -28,7 +28,7 @@ const PlanoConta = () => {
         api.get(`lancamentos/planos-conta?login=${user.login}`, headers)
         .then((res) =>{
             
-            dispatch(IPlanoContaInfo(res.data))
+            dispatch(PlanoContaInfo(res.data))
             setPlanosConta(res.data)
             console.log(res.data)
             
@@ -49,7 +49,7 @@ const PlanoConta = () => {
         const user = store.getState().user
         api.post(`lancamentos/planos-conta?login=${user.login}`,plano, headers)
         .then(res => {
-            dispatch(IPlanoContaInfo(plano))
+            dispatch(PlanoContaInfo(plano))
             setPlanosConta([...planosConta, plano])
             setNome("")
             toast.success("Plano de Conta adicionado com sucesso!")

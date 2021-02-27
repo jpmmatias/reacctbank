@@ -18,11 +18,11 @@ export function DadosUserInfo (dadosUser: DadosUser){
   }
 }
 
-export function IPlanoContaInfo (IPlanoConta: IPlanoConta){
+export function PlanoContaInfo (PlanoConta: IPlanoConta){
   return{
     type:"ADD_IPLANO_CONTA",
     payload:{
-      IPlanoConta
+      PlanoConta
     }
   }
 }
