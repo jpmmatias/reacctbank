@@ -54,12 +54,15 @@ export interface IPlanoConta{
 	padrao:boolean,
 	tipoMovimento:string,
 }
-export interface DepositoConta{
+export interface IDepositoConta{
+	conta:number;
+	contaDestino:string,
+	data:string,
 	descricao:string,
-	id:number,
 	login:string,
-	padrao:boolean,
-	tipoMovimento:string,
+	planoConta:number,
+	valor: number
+
 }
 export interface TransacoesConta{
 	descricao:string,
