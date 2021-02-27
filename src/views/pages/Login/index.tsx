@@ -1,4 +1,4 @@
-import React, { useState, useEffect, } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from '../../../assets/images/logo.svg';
 import SectionHome from '../../components/Section';
 import Card from '../../components/Card';
@@ -9,14 +9,15 @@ import api from '../../../services/api';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import { IToken } from '../../../types';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 import { UserInfo } from '../../../store/modules/user/actions';
+import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
 
 const Login = () => {
 	const [username, setUsername] = useState('');
 	const [password, setpassword] = useState('');
-  const dispatch = useDispatch()
-
+	const dispatch = useDispatch();
+	const { width, height } = useWindowDimensions();
 	const history = useHistory();
 
 	const [storage, setStorage] = useState<IToken>((): any => {
@@ -36,7 +37,7 @@ const Login = () => {
 			.then((res) => {
 				localStorage.setItem('@tokenApp', res.data.token);
 				history.push('/dashboard');
-				dispatch(UserInfo(res.data.usuario))
+				dispatch(UserInfo(res.data.usuario));
 			})
 			.catch((err) => {
 				toast.error(err.message);
@@ -48,7 +49,7 @@ const Login = () => {
 				<ToastContainer />
 				<header>
 					<Link className='link' to='/'>
-					<img src={logo} alt='Gama Academy' />
+						<img src={logo} alt='Gama Academy' />
 					</Link>
 				</header>
 				<div className='main'>
@@ -83,7 +84,7 @@ const Login = () => {
 									textWeight={500}
 									backgroundColor='#68DE5A'
 									icon={arrowIcon}
-									widthSize={276.74}
+									widthSize={width <= 1024 ? 240 : 276.74}
 									heightSize={47.66}
 									type='submit'
 								></Button>
