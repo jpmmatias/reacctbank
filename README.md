@@ -64,6 +64,8 @@ A aplicação web consiste em um serviço de banco digital fícticio, que possib
 
 ### MindMap
 
+[Acesse aqui!](https://miro.com/app/board/o9J_lS43pUM=/)
+
 <div id='projectstructure'></div>
 
 ### Estrutura do projeto
