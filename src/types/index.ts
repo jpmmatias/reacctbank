@@ -56,6 +56,7 @@ export interface IPlanoConta{
 }
 export interface IDepositoConta{
 	conta:number;
+	contaDestino:string,
 	data:string,
 	descricao:string,
 	login:string,
