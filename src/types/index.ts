@@ -54,7 +54,7 @@ export interface IPlanoConta{
 	padrao:boolean,
 	tipoMovimento:string,
 }
-export interface DepositoConta{
+export interface IDepositoConta{
 	descricao:string,
 	id:number,
 	login:string,

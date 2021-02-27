@@ -1,4 +1,4 @@
-import { User, DadosUser, IPlanoConta} from '../../../types';
+import { User, DadosUser, IPlanoConta, IDepositoConta} from '../../../types';
 
 export function UserInfo(user: User) {
   return {
@@ -9,7 +9,7 @@ export function UserInfo(user: User) {
   }
 }
 
-export function DadosUserInfo (dadosUser:DadosUser){
+export function DadosUserInfo (dadosUser: DadosUser){
   return{
     type:"ADD_DADOS_USER",
     payload:{
@@ -18,11 +18,20 @@ export function DadosUserInfo (dadosUser:DadosUser){
   }
 }
 
-export function IPlanoContaInfo (IPlanoConta:IPlanoConta){
+export function IPlanoContaInfo (IPlanoConta: IPlanoConta){
   return{
     type:"ADD_IPLANO_CONTA",
     payload:{
       IPlanoConta
+    }
+  }
+}
+
+export function DepositoContaInfo (DepositoConta: IDepositoConta){
+  return{
+    type:"ADD_DEPOSITO_CONTA",
+    payload:{
+      DepositoConta
     }
   }
 }
