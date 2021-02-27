@@ -2,38 +2,39 @@ import React, { useState, useEffect } from 'react';
 import Card from '../../components/Card';
 import Section from '../../components/Section';
 import hiddenImg from '../../../assets/images/hidden.svg';
-import logo from '../../../assets/images/gamaDashboardLogo.svg';
+import logo from '../../../assets/images/logoGama.png';
 import pixImg from '../../../assets/icons/Pix.svg';
+import depositosIcon from '../../../assets/icons/depositarIcon.svg';
+import pagamentosIcon from '../../../assets/icons/lancamentosIcon.svg';
+import transferenciaIcon from '../../../assets/icons/transferenciaIcon.svg';
 import dollar from '../../../assets/icons/dollar.svg';
 import cardCredit from '../../../assets/icons/credit-card.svg';
 import { Sidebar, Container, Content } from './style';
 import Lancamento from '../../components/Lançamento';
 import { Link, useHistory } from 'react-router-dom';
-import jwt_decote from 'jwt-decode';
 import { toast } from 'react-toastify';
 import api from '../../../services/api';
 import PlanoConta from '../../components/PlanoConta';
-import DepositoConta from '../../components/DepositoConta'
+import DepositoConta from '../../components/DepositoConta';
 import TransacoesConta from '../../components/TransacoesConta';
 import PagamentoConta from '../../components/PagamentoConta';
 import { DadosUser, LancamentoProps } from '../../../types';
 import { useDispatch, useStore } from 'react-redux';
 import { DadosUserInfo } from '../../../store/modules/user/actions';
 
-
 const Dashboard = () => {
-	const store = useStore()
-	const dispatch = useDispatch()
+	const store = useStore();
+	const dispatch = useDispatch();
 
 	const [dadosUser, setDadosUser] = useState<DadosUser>();
-	const [screen, setScreen] = useState("home");
+	const [screen, setScreen] = useState('home');
 
 	const history = useHistory();
 
 	const TokenStorage = null || localStorage.getItem('@tokenApp');
 
 	useEffect(() => {
-		const user = store.getState().user
+		const user = store.getState().user;
 		api
 			.get(`dashboard?fim=2021-02-18&inicio=2021-02-18&login=${user.login}`, {
 				headers: {
@@ -43,7 +44,7 @@ const Dashboard = () => {
 			})
 			.then((res) => {
 				setDadosUser(res.data);
-				dispatch(DadosUserInfo(res.data))
+				dispatch(DadosUserInfo(res.data));
 			})
 			.catch((e) => {
 				localStorage.clear();
@@ -53,7 +54,6 @@ const Dashboard = () => {
 				history.push('/login');
 			});
 	}, []);
-
 
 	return (
 		<Section background='purple'>
@@ -67,51 +67,51 @@ const Dashboard = () => {
 					<nav>
 						<ul>
 							<li>
-
-							</li>
-							<li>
-								<div role='button' onClick={() => setScreen("depositos")}>
-									<img src={pixImg} alt='Icone Pix' aria-hidden='true' />
+								<div role='button' onClick={() => setScreen('depositos')}>
+									<img src={depositosIcon} alt='Icone Pix' aria-hidden='true' />
 									<h1>Depósitos</h1>
 								</div>
 							</li>
 							<li>
-								<div role='button' onClick={() => setScreen("planos")}>
+								<div role='button' onClick={() => setScreen('planos')}>
 									<img src={pixImg} alt='Icone Pix' aria-hidden='true' />
 									<h1>Planos</h1>
 								</div>
 							</li>
 							<li>
-								<div role='button' onClick={() => setScreen("pagamentos")}>
-									<img src={pixImg} alt='Icone Pix' aria-hidden='true' />
+								<div role='button' onClick={() => setScreen('pagamentos')}>
+									<img
+										src={pagamentosIcon}
+										alt='Icone Pix'
+										aria-hidden='true'
+									/>
 									<h1>Pagamentos</h1>
 								</div>
 							</li>
 							<li>
-								<div role='button' onClick={() => setScreen("transacoes")}>
-									<img src={pixImg} alt='Icone Pix' aria-hidden='true' />
+								<div role='button' onClick={() => setScreen('transacoes')}>
+									<img
+										src={transferenciaIcon}
+										alt='Icone Pix'
+										aria-hidden='true'
+									/>
 									<h1>Transações</h1>
 								</div>
 							</li>
 						</ul>
 					</nav>
 				</Sidebar>
-				{screen === 'home' &&
+				{screen === 'home' && (
 					<Content>
 						<div className='contentHead'>
 							<h1>
 								Olá <span>{store.getState().user.nome}</span>, seja bem vindo!
-						</h1>{ }
+							</h1>
+							{}
 							<img src={hiddenImg} alt='Hidden' />
 						</div>
-						<div
-							style={{
-								display: 'flex',
-								justifyContent: 'space-between',
-								marginTop: '1.5%',
-							}}
-						>
-							<div style={{ width: '47%', display: 'flex', height: '3%' }}>
+						<div className='contas'>
+							<div className='cardConta'>
 								<Card>
 									<div className='cardContentTitle'>
 										<img src={dollar} alt='Dollar Icon' aria-hidden='true' />
@@ -120,23 +120,32 @@ const Dashboard = () => {
 									<div className='cardContentMain'>
 										<h2>Saldo Disponivel</h2>
 										<span>R$: {dadosUser?.contaBanco.saldo}</span>
-
 									</div>
 									<div className='cardContentTotal'>
 										<h2>Transações</h2>
-										<span>R$: {dadosUser?.contaBanco.lancamentos.
-											reduce((acc: LancamentoProps, currentValue: LancamentoProps) => {
-												return acc.valor + currentValue.valor
-											}, 0)
-										}
+										<span>
+											R$:{' '}
+											{dadosUser?.contaBanco.lancamentos.reduce(
+												(
+													acc: LancamentoProps,
+													currentValue: LancamentoProps
+												) => {
+													return acc.valor + currentValue.valor;
+												},
+												0
+											)}
 										</span>
 									</div>
 								</Card>
 							</div>
-							<div style={{ width: '47%', display: 'flex', height: '3%' }}>
+							<div className='cardConta'>
 								<Card>
 									<div className='cardContentTitle'>
-										<img src={cardCredit} alt='Dollar Icon' aria-hidden='true' />
+										<img
+											src={cardCredit}
+											alt='Dollar Icon'
+											aria-hidden='true'
+										/>
 										<h1>Conta Crédito</h1>
 									</div>
 									<div className='cardContentMain'>
@@ -145,23 +154,23 @@ const Dashboard = () => {
 									</div>
 									<div className='cardContentTotal'>
 										<h2>Limite Disponível</h2>
-										<span>R$: {dadosUser?.contaCredito.lancamentos.
-											reduce((acc: LancamentoProps, currentValue: LancamentoProps) => {
-												return acc.valor + currentValue.valor
-											}, 0)
-										}</span>
+										<span>
+											R$:{' '}
+											{dadosUser?.contaCredito.lancamentos.reduce(
+												(
+													acc: LancamentoProps,
+													currentValue: LancamentoProps
+												) => {
+													return acc.valor + currentValue.valor;
+												},
+												0
+											)}
+										</span>
 									</div>
 								</Card>
 							</div>
 						</div>
-						<div
-							style={{
-								width: '100%',
-								height: '48%',
-								display: 'flex',
-								marginTop: '3%',
-							}}
-						>
+						<div className='lancamentosCard'>
 							<Card>
 								<div className='cardContentTitle'>
 									<img src={cardCredit} alt='Dollar Icon' aria-hidden='true' />
@@ -182,33 +191,35 @@ const Dashboard = () => {
 											}
 										)
 									) : (
-											<h1>Ainda não fez nenhum lançamento</h1>
-										)}
+										<h1 className='aindantemlancamentos'>
+											Ainda não fez nenhum lançamento
+										</h1>
+									)}
 								</ul>
 							</Card>
 						</div>
 					</Content>
-				}
-				{screen === 'planos' &&
+				)}
+				{screen === 'planos' && (
 					<Content center>
 						<PlanoConta />
 					</Content>
-				}
-				{screen === 'depositos' &&
+				)}
+				{screen === 'depositos' && (
 					<Content center>
 						<DepositoConta />
 					</Content>
-				}
-				{screen === 'transacoes' &&
+				)}
+				{screen === 'transacoes' && (
 					<Content center>
 						<TransacoesConta />
 					</Content>
-				}
-				{screen === 'pagamentos' &&
+				)}
+				{screen === 'pagamentos' && (
 					<Content center>
 						<PagamentoConta />
 					</Content>
-				}
+				)}
 			</Container>
 		</Section>
 	);
