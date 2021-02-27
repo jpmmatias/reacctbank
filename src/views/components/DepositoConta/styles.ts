@@ -1,48 +1,61 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+	width: 50%;
+	height: 50%;
 
-    width: 50%;
-    height: 50%;
+	@media (max-width: 414px) {
+		width: 100%;
+		height: 100%;
+	}
 
-    form{
-        display:flex;
-        flex-direction:row;
-        margin-top:25px;
-        
+	form {
+		display: flex;
+		flex-direction: row;
+		margin-top: 25px;
 
-        div{
-            display:flex;   
-            flex-direction:column;
-            margin-right:30px;
-            width:45%;
+		@media (max-width: 414px) {
+			flex-direction: column;
+		}
 
-            label{
-                margin-bottom: 10px;
-            }
+		div {
+			display: flex;
+			flex-direction: column;
+			margin-right: 30px;
+			width: 45%;
 
-            select{
-                height:30px;
-            }
-        }
+			label {
+				margin-bottom: 10px;
+			}
 
-        button{
-            width:100px;
-            height:50px;
-            border-radius:15px;
-            background-color:#8c52e5;
-            border:1px;
-            color:#fff;
+			select {
+				height: 30px;
+				@media (max-width: 414px) {
+					margin-bottom: 4%;
+				}
+			}
 
-            &:hover{
-                background-color:#7545c1   
-            }
-        }
-        
-        input{
-            font-weight:10;
-            width:100%;
-        }
-    }
+			@media (max-width: 414px) {
+				width: 100%;
+			}
+		}
 
+		button {
+			width: 100px;
+			height: 50px;
+			border-radius: 15px;
+			background-color: #8c52e5;
+			border: 1px;
+			color: #fff;
+
+			&:hover {
+				background-color: #7545c1;
+			}
+		}
+
+		input {
+			font-weight: 10;
+			width: 100%;
+		}
+	}
 `;

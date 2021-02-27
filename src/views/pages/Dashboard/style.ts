@@ -69,6 +69,7 @@ export const Sidebar = styled.aside`
 						font-size: 14px;
 						font-weight: 400;
 						color: #fff;
+						word-break: break-all;
 					}
 					@media (max-width: 414px) {
 						width: 80%;
