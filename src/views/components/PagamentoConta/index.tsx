@@ -54,6 +54,7 @@ const PagamentoConta = () => {
                 default:
                     break;
             }
+            store.getState().SetScreen("home")
         }).catch((err)=>{
             console.log(err)
         })
