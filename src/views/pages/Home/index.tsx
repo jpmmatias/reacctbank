@@ -231,6 +231,7 @@ const Home: React.FC = () => {
 			</Section>
 			<Section background='gray'>
 				<div className='secondSection'>
+
 					<div className='phoneSection'>
 						<h1>Conta digital do Gama Academy</h1>
 						<img src={phoneImage} alt='Apl' />
@@ -241,6 +242,7 @@ const Home: React.FC = () => {
 							</p>
 						</div>
 					</div>
+
 					<div className='phoneSection'>
 						<h1>Cartão de Crédito</h1>
 						<div className='imgwrapper'>
@@ -254,6 +256,7 @@ const Home: React.FC = () => {
 						</div>
 					</div>
 				</div>
+        
 			</Section>
 			<Section background='purple'>
 				<div className='thirdSection'>
