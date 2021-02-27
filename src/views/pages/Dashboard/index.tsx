@@ -60,9 +60,9 @@ const Dashboard = () => {
 			<Container>
 				<Sidebar>
 					<div className='logo'>
-						<Link className='link' to='/dashboard'>
+						<div role='button' onClick={() => setScreen("home")}>
 							<img src={logo} alt='Gama Academy' />
-						</Link>
+						</div>
 					</div>
 					<nav>
 						<ul>
