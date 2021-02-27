@@ -76,7 +76,7 @@ export const Container = styled.div`
 				font-size: 20px;
 			}
 			@media (max-width: 414px) {
-				font-size: 14px;
+				font-size: 16px;
 			}
 		}
 	}
