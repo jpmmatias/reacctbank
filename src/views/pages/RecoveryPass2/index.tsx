@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import logo from '../../../assets/images/logo.svg';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import SectionHome from '../../components/Section';
 import Card from '../../components/Card';
 import Button from '../../components/Button';
@@ -10,11 +10,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useParams, useHistory } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { NewPasswordSchema } from '../../../utils/validations/NewPasswordValidation';
+import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
 
 const RecoveryPass = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [password2, setPassword2] = useState('');
+	const { width, height } = useWindowDimensions();
 
 	const history = useHistory();
 
@@ -58,7 +60,7 @@ const RecoveryPass = () => {
 			<SectionHome background='purple'>
 				<header>
 					<Link className='link' to='/'>
-					<img src={logo} alt='Gama Academy' />
+						<img src={logo} alt='Gama Academy' />
 					</Link>
 				</header>
 				<div className='main'>
@@ -106,7 +108,7 @@ const RecoveryPass = () => {
 									textWeight={500}
 									backgroundColor='#68DE5A'
 									icon={arrowIcon}
-									widthSize={276.74}
+									widthSize={width <= 1024 ? 240 : 276.74}
 									heightSize={47.66}
 									type='submit'
 								></Button>

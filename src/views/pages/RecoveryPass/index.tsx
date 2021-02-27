@@ -8,10 +8,12 @@ import api from '../../../services/api';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link, useHistory } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
 
 const RecoveryPass = () => {
 	const [username, setUsername] = useState('');
 	const [email, setemail] = useState('');
+	const { width, height } = useWindowDimensions();
 
 	const history = useHistory();
 
@@ -78,7 +80,7 @@ const RecoveryPass = () => {
 									textWeight={500}
 									backgroundColor='#68DE5A'
 									icon={arrowIcon}
-									widthSize={276.74}
+									widthSize={width <= 1024 ? 240 : 276.74}
 									heightSize={47.66}
 									type='submit'
 								></Button>
