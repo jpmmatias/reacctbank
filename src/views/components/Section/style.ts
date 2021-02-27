@@ -14,35 +14,47 @@ export const Container = styled.section<sectionProps>`
 	background-attachment: fixed;
 	background-position: center;
 	background-repeat: no-repeat;
+  background-size: cover;
 	background-color: ${(props) =>
 		props.background === 'purple' ? '#8C52E5' : '#EAEAEA'};
+    
 	header {
 		height: 10%;
-		width: 100%;
-		img {
-			width: auto;
-			height: 100%;
-			margin-top: 52px;
-			margin-left: 62px;
-		}
+    margin: 30px 45px;
 	}
+
 	.main {
 		display: flex;
 		justify-content: space-around;
-		height: 70%;
+		height: 700px;
 		z-index: -1;
+
+    @media(max-width: 618px) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
 		.callToAction {
 			z-index: 3;
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
 			width: 281px;
+
 			p {
 				color: #fff;
 				font-size: 26px;
-				margin-bottom: 39px;
-			}
+				margin-bottom: 12px;
+      }
+
+      @media(max-width: 618px) {
+        p {
+          font-size: 18px;
+        }
+      }
 		}
+
 		.form {
 			z-index: 3;
 			margin: auto 0;
@@ -53,63 +65,78 @@ export const Container = styled.section<sectionProps>`
 			height: 400px;
 		}
 	}
+
 	.secondSection {
-		display: flex;
+    display: flex;
 		height: 100%;
+
+    @media(max-width: 1024px) {
+      display: flex;
+      flex-direction: column;
+
+      p {
+        font-size: 1.1em;
+        margin-bottom: 20px;
+      }
+    }
+
 		.phoneSection {
 			flex: 1;
-			height: 100%;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
 			&:first-of-type {
 				color: #68de5a;
 				background-color: black;
+
 				h1 {
-					margin-top: 50px;
 					text-align: center;
 					font-size: 34px;
 					font-weight: 500;
+          margin: 3rem 3rem 3rem 7rem;
 				}
+
 				img {
-					width: 70%;
-					height: auto;
-				}
-				.paragraphwrapper {
-					width: 459px;
-					margin: 0 auto;
-					p {
-						font-size: 18px;
-						font-weight: 400;
-						padding-right: 30%;
-					}
-				}
-			}
-			&:last-of-type {
-				h1 {
-					margin-top: 50px;
-					text-align: center;
-					font-size: 34px;
-					font-weight: 500;
-					margin-bottom: 25px;
-				}
-				.imgwrapper {
-					display: flex;
-					justify-content: center;
-					align-items: center;
-					width: 100%;
-					img {
-						width: 40%;
-						height: auto;
-						margin-bottom: 25px;
-					}
+					height: 350px;
+          width: 350px;
 				}
 
 				.paragraphwrapper {
-					width: 459px;
-					margin: 0 auto;
-					margin-top: 14%;
+					/* width: 459px;
+					margin: 0 auto; */
+
 					p {
 						font-size: 18px;
 						font-weight: 400;
-						padding-right: 30%;
+            margin-top: 25px;
+					}
+				}
+			}
+
+			&:last-of-type {
+				color: #1D1D1D;
+				background-color: #F8F8F8;
+
+				h1 {
+					text-align: center;
+					font-size: 34px;
+					font-weight: 500;
+          margin: 3rem 3rem 3rem 7rem;
+				}
+
+				img {
+					height: 350px;
+          width: 350px;
+				}
+
+				.paragraphwrapper {
+					p {
+						font-size: 18px;
+						font-weight: 400;
+            margin-top: 25px;
 					}
 				}
 			}
@@ -118,35 +145,52 @@ export const Container = styled.section<sectionProps>`
 	.thirdSection {
 		display: flex;
 		height: 100%;
+    
+    @media(max-width: 618px) {
+      display: flex;
+      flex-direction: column;
+      margin-top: 2.5rem;
+      text-align: center;
+    }
+
 		.divisor {
 			display: flex;
-			flex-direction: column;
 			align-items: center;
-			justify-content: center;
+			justify-content: space-around;
 			width: 100%;
+
 			&:first-of-type {
 				div {
 					color: #fff;
-					width: 459px;
 					h1 {
-						font-size: 42px;
+						font-size: 38px;
 						font-weight: 700;
-						margin-bottom: 36px;
+						margin-bottom: 32px;
+            text-align: center;
 					}
 				}
+        p {
+          font-size: 18px;
+        }
 			}
+
 			&:last-of-type {
 				color: #68de5a;
-				font-size: 96px;
+				font-size: 86px;
 			}
 		}
 	}
+
 	.forthSection {
 		width: 50%;
 		height: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+    background-color: ${(props) =>
+		props.background === 'gray' ? '#EAEAEA' : '#8C52E5'};
+    background-size: cover;
+
 		div {
 			width: 459px;
 			color: #fff;
@@ -237,3 +281,4 @@ export const Container = styled.section<sectionProps>`
 		line-height: 15, 23px;
 	}
 `;
+
