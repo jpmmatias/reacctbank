@@ -13,16 +13,19 @@ export const Sidebar = styled.aside`
 	@media (max-width: 414px) {
 		div.logo {
 			margin-bottom: 30%;
-			width: 100%;
-		img {
-			width: 80%;
-			height: auto;
+			margin-top: 10%;
+			align-items: center;
+			justify-content: center;
+			img {
+				margin: 0 auto !important;
+				width: 80% !important;
+				height: auto !important;
+			}
 		}
-	}
 	}
 	div.logo {
 		width: 100%;
-		margin-top: 5%;
+		margin-top: 15%;
 		margin-bottom: 12%;
 		display: flex;
 		align-items: center;
@@ -31,11 +34,9 @@ export const Sidebar = styled.aside`
 			width: 35%;
 			height: auto;
 		}
-
 	}
 
 	nav {
-		
 		height: 100%;
 		ul {
 			height: 60%;
@@ -70,21 +71,18 @@ export const Sidebar = styled.aside`
 						color: #fff;
 					}
 					@media (max-width: 414px) {
-						width:80%;
-						align-items:center;
-					img {
+						width: 80%;
+						align-items: center;
+						img {
 							width: 55%;
 							height: auto;
 						}
-					h1 {
-						font-size: 11px;
-						font-weight: 400;
-						color: #fff;
+						h1 {
+							font-size: 11px;
+							font-weight: 400;
+							color: #fff;
+						}
 					}
-
-		}
-	
-	}
 				}
 			}
 		}

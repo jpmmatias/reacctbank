@@ -59,10 +59,8 @@ const Dashboard = () => {
 		<Section background='purple'>
 			<Container>
 				<Sidebar>
-					<div className='logo'>
-						<div role='button' onClick={() => setScreen("home")}>
-							<img src={logo} alt='Gama Academy' />
-						</div>
+					<div role='button' className='logo' onClick={() => setScreen('home')}>
+						<img src={logo} alt='Gama Academy' />
 					</div>
 					<nav>
 						<ul>
