@@ -2,21 +2,20 @@ import React, { useEffect, useState } from 'react';
 import Card from '../Card';
 import { Container } from './styles';
 import { useDispatch, useStore } from 'react-redux';
-import { IDepositoConta } from '../../../types';
+import { IDepositoConta, IPlanoConta, User } from '../../../types';
 import { DepositoContaInfo } from '../../../store/modules/user/actions';
 
 const DepositoConta = () => {
 	const dispatch = useDispatch();
 	const store = useStore();
-	const user = store.getState().user;
-
+	const planosConta: IPlanoConta[] = store.getState().PlanosConta;
+	const [tipoDeposito, setTipoDeposito] = useState('');
 	//const[DepositoConta, setDepositoConta] = useState<IDepositoConta[]>([])
 	const [valor, setValor] = useState(0);
 	const [contaDestino, setContaDestino] = useState('');
 	const [data, setData] = useState('');
 	const [descricao, setDescricao] = useState('');
-	const [tipoDeposito, setTipoDeposito] = useState('');
-	//console.log(tipoDeposito)
+	const [planoConta, setPlanoConta] = useState(0);
 	const [novoDeposito, setNovoDeposito] = useState<IDepositoConta>({
 		conta: 0,
 		contaDestino: '',
@@ -31,6 +30,13 @@ const DepositoConta = () => {
 		method(value);
 		setNovoDeposito({ ...novoDeposito, [campo]: value });
 	}
+
+	function deposito() {
+		let user: User = store.getState().user;
+		setNovoDeposito({ ...novoDeposito, login: user.login });
+	}
+
+	console.log(planosConta);
 
 	return (
 		<Container>
