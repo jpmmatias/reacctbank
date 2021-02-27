@@ -3,7 +3,7 @@ import Card from '../Card';
 import { Container } from './styles';
 import { useDispatch, useStore } from 'react-redux';
 import { DadosUser, IDepositoConta, IPlanoConta, User } from '../../../types';
-import { DepositoContaInfo } from '../../../store/modules/user/actions';
+import { DepositoContaInfo, UpdateSaldoContaBanco, UpdateSaldoContaCredito} from '../../../store/modules/user/actions';
 import api from '../../../services/api';
 import Headers from '../../../services/headers';
 
@@ -35,10 +35,28 @@ const DepositoConta = () => {
             login:user.login, 
             conta:dadosUser.contaBanco.id}
 
-        console.log(deposito)
-        api.post('lancamentos', deposito, Headers)
+        api.post('lancamentos', deposito, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: localStorage.getItem('@tokenApp'),
+            },
+        })
         .then((res)=>{
             console.log("sucesso")
+            switch(deposito.planoConta){
+                case 838:
+                    dispatch(UpdateSaldoContaBanco(deposito.valor))
+                    break;
+                case 840:
+                    dispatch(UpdateSaldoContaCredito(deposito.valor))
+                    dispatch(UpdateSaldoContaBanco(deposito.valor * -1))
+                    break;
+                default:
+                    break;
+            }
+            store.getState().SetScreen("home")
+            
+
         }).catch(err => {
             console.log(err)
         })

@@ -53,3 +53,30 @@ export function PagamentoContaInfo (PagamentoConta: IPagamentoConta){
     }
   }
 }
+
+export function UpdateSaldoContaBanco(valor:number){
+  return{
+    type:"UPDATE_SALDO_CONTA_BANCO",
+    payload:{
+      valor
+    }
+  }
+}
+
+export function UpdateSaldoContaCredito(valorCredito:number){
+  return{
+    type:"UPDATE_SALDO_CONTA_CREDITO",
+    payload:{
+      valorCredito
+    }
+  }
+}
+
+export function SetScreen(SetScreen:React.Dispatch<any>){
+  return{
+    type:"SET_SCREEN",
+    payload:{
+      SetScreen
+    }
+  }
+}
