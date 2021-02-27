@@ -18,19 +18,21 @@ import PlanoConta from '../../components/PlanoConta';
 import DepositoConta from '../../components/DepositoConta';
 import TransacoesConta from '../../components/TransacoesConta';
 import PagamentoConta from '../../components/PagamentoConta';
-import { DadosUser, LancamentoProps } from '../../../types';
-import { useDispatch, useStore } from 'react-redux';
-import { AddPlanosConta, DadosUserInfo, PlanoContaInfo } from '../../../store/modules/user/actions';
-import headers from '../../../services/headers';
+import { DadosUser, LancamentoProps, IState } from '../../../types';
+import { useDispatch, useSelector, useStore } from 'react-redux';
+import { AddPlanosConta, DadosUserInfo, SetScreen} from '../../../store/modules/user/actions';
 
 const Dashboard = () => {
 	const store = useStore();
 	const dispatch = useDispatch();
+	const globalDadosUser = useSelector((state:IState) => state.dadosUser)
 
 	const [dadosUser, setDadosUser] = useState<DadosUser>();
 	const [screen, setScreen] = useState('home');
 
 	const history = useHistory();
+
+	console.log(globalDadosUser)
 
 	const TokenStorage = null || localStorage.getItem('@tokenApp');
 
@@ -72,6 +74,10 @@ const Dashboard = () => {
             console.log(err)
         })
     },[])
+
+	useEffect(()=>{
+		dispatch(SetScreen(setScreen))
+	},[])
 
 	return (
 		<Section background='purple'>
@@ -135,13 +141,13 @@ const Dashboard = () => {
 									</div>
 									<div className='cardContentMain'>
 										<h2>Saldo Disponivel</h2>
-										<span>R$: {dadosUser?.contaBanco.saldo}</span>
+										<span>R$: {globalDadosUser?.contaBanco?.saldo}</span>
 									</div>
 									<div className='cardContentTotal'>
 										<h2>Transações</h2>
 										<span>
 											R$:{' '}
-											{dadosUser?.contaBanco.lancamentos.reduce(
+											{globalDadosUser?.contaBanco?.lancamentos?.reduce(
 												(
 													acc: LancamentoProps,
 													currentValue: LancamentoProps
@@ -166,13 +172,13 @@ const Dashboard = () => {
 									</div>
 									<div className='cardContentMain'>
 										<h2>Fatura Atual</h2>
-										<span>R$: {dadosUser?.contaCredito.saldo}</span>
+										<span>R$: {globalDadosUser?.contaCredito?.saldo}</span>
 									</div>
 									<div className='cardContentTotal'>
 										<h2>Limite Disponível</h2>
 										<span>
 											R$:{' '}
-											{dadosUser?.contaCredito.lancamentos.reduce(
+											{globalDadosUser?.contaCredito?.lancamentos?.reduce(
 												(
 													acc: LancamentoProps,
 													currentValue: LancamentoProps
@@ -193,8 +199,8 @@ const Dashboard = () => {
 									<h1>Últimos lançamentos</h1>
 								</div>
 								<ul className='lançamentos'>
-									{dadosUser?.contaBanco.lancamentos.lenght > 0 ? (
-										dadosUser?.contaBanco.lancamentos.forEach(
+									{globalDadosUser?.contaBanco?.lancamentos?.lenght > 0 ? (
+										globalDadosUser?.contaBanco?.lancamentos?.forEach(
 											(lancamento: LancamentoProps) => {
 												return (
 													<Lancamento

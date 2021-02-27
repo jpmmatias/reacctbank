@@ -84,3 +84,11 @@ export interface IPagamentoConta{
 	planoConta:number,
 	valor: number
 }
+
+export interface IState {
+	user: User,
+	dadosUser: DadosUser,
+	PlanosConta: IPlanoConta[],
+	PagamentoConta: IPagamentoConta[],
+	SetScreen:React.Dispatch<any>,
+  }

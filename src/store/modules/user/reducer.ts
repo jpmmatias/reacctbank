@@ -1,20 +1,13 @@
-import { IToken, Form, User, LancamentoProps, DadosUser, IPlanoContaComponent, IPlanoConta, IDepositoConta, IPagamentoConta } from '../../../types/index'
+import { IToken, Form, User, LancamentoProps, DadosUser, IPlanoContaComponent, IPlanoConta, IDepositoConta, IPagamentoConta, IState } from '../../../types/index'
 import { Reducer } from 'redux'
-
-interface IState {
-  user: User,
-  dadosUser: DadosUser,
-  PlanosConta: IPlanoConta[],
-  DepositoConta: IDepositoConta[],
-  PagamentoConta: IPagamentoConta[]
-}
+import { stat } from 'fs'
 
 const INITIAL_STATE = {
   user: {},
   dadosUser: {},
   PlanosConta: [],
-  DepositosConta: {},
-  PagamentosConta:{}
+  PagamentosConta:{},
+  SetScreen: () =>{},
 }
 
 const Users: Reducer<IState | any> = (state = INITIAL_STATE, action) => {
@@ -76,6 +69,45 @@ const Users: Reducer<IState | any> = (state = INITIAL_STATE, action) => {
         ]
       }
 
+      case "UPDATE_SALDO_CONTA_BANCO":
+      const { valor } = action.payload
+      console.log(valor)
+      console.log("CHAMOU")
+      let saldo = state.dadosUser.contaBanco.saldo + valor
+      return {
+        ...state,
+        dadosUser:{
+          ...state.dadosUser,
+          contaBanco:{
+            ...state.dadosUser.contaBanco,
+            saldo
+          },
+        },
+      }
+
+      case "UPDATE_SALDO_CONTA_CREDITO":
+        const {valorCredito} = action.payload
+        console.log("CHAMOU")
+        let saldoCredito = state.dadosUser.contaCredito.saldo + valorCredito
+        return{
+          ...state,
+          dadosUser:{
+            ...state.dadosUser,
+            contaCredito:{
+              ...state.dadosUser.contaCredito,
+              saldo:saldoCredito
+            }
+          }
+        }
+
+
+      case "SET_SCREEN":
+        const {SetScreen} = action.payload
+        console.log(SetScreen)
+        return{
+          ...state,
+          SetScreen
+        }
 
       default: {
           return state
