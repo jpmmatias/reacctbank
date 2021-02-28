@@ -43,6 +43,7 @@ const Home: React.FC = () => {
 	const [errors, setErrors] = useState<Form>(intialState);
 	const [form, setForm] = useState<Form>(intialState);
 	const { width } = useWindowDimensions();
+	const [startForm, setStartForm] = useState(false);
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -69,7 +70,9 @@ const Home: React.FC = () => {
 	};
 
 	useEffect(() => {
-		validateFields(form);
+		if (startForm) {
+			validateFields(form);
+		}
 	}, [form]);
 
 	function handleChange(
@@ -77,6 +80,7 @@ const Home: React.FC = () => {
 		campo: string,
 		method: React.Dispatch<React.SetStateAction<string>>
 	) {
+		setStartForm(true);
 		method(value);
 		setForm({ ...form, [campo]: value });
 	}
