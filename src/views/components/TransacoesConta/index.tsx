@@ -25,26 +25,32 @@ const TransacoesConta = () => {
                 <div className='cardContentMain'>
                     {globalDadosUser?.contaBanco?.lancamentos?.length > 0 &&
                         <div>
-                            <h2>Último Lançamento Conta Banco</h2>
-                            <Lancamento
-                                descricao={globalDadosUser.contaBanco.lancamentos[globalDadosUser.contaBanco.lancamentos.length - 1].descricao}
-                                contaDestino={globalDadosUser.contaBanco.lancamentos[globalDadosUser.contaBanco.lancamentos.length - 1].contaDestino}
-                                valor={globalDadosUser.contaBanco.lancamentos[globalDadosUser.contaBanco.lancamentos.length - 1].valor}
-                                data={globalDadosUser.contaBanco.lancamentos[globalDadosUser.contaBanco.lancamentos.length - 1].data}
-                            />
+                            <h2>Últimos Lançamentos Conta Banco</h2>
+                            {globalDadosUser?.contaBanco?.lancamentos?.map((lancamento:LancamentoProps) =>(
+                                <Lancamento
+                                descricao={lancamento.descricao}
+                                contaDestino={lancamento.contaDestino}
+                                valor={lancamento.valor}
+                                data={lancamento.data}
+                                />
+                            ))}
+                            
                         </div>
                     }
 
                     {globalDadosUser?.contaCredito?.lancamentos?.length > 0 &&
                         <div>
-                            <h2>Último Lançamento Conta Crédito</h2>
-                            <Lancamento
-                                descricao={globalDadosUser.contaCredito.lancamentos[globalDadosUser.contaCredito.lancamentos.length - 1].descricao}
-                                contaDestino={globalDadosUser.contaCredito.lancamentos[globalDadosUser.contaCredito.lancamentos.length - 1].contaDestino}
-                                valor={globalDadosUser.contaCredito.lancamentos[globalDadosUser.contaCredito.lancamentos.length - 1].valor}
-                                data={globalDadosUser.contaCredito.lancamentos[globalDadosUser.contaCredito.lancamentos.length - 1].data}
-                            />
+                            <h2>Últimos Lançamentos Conta Crédito</h2>
+                            {globalDadosUser?.contaCredito?.lancamentos?.map((lancamento:LancamentoProps) =>(
+                                <Lancamento
+                                    descricao={lancamento.descricao}
+                                    contaDestino={lancamento.contaDestino}
+                                    valor={lancamento.valor}
+                                    data={lancamento.data}
+                                />
+                            ))}
                         </div>
+                    
                     }
 
                     {!(globalDadosUser?.contaBanco?.lancamentos?.length > 0 || globalDadosUser?.contaCredito?.lancamentos?.length > 0) &&
