@@ -21,7 +21,7 @@ const PagamentoConta = () => {
     const [tipoPagamento, setTipoPagamento] = useState('')
 
     const [novoPagamento, setNovoPagamento] = useState<IPagamentoConta>({
-        conta: dadosUser.contaBanco.id, contaDestino: "", data: "", descricao: "",
+        conta: dadosUser.contaBanco.id, contaDestino: "", data: "", descricao: "PAGAMENTO_LUZ",
         login: "", planoConta:841, valor: 0
     })
 
