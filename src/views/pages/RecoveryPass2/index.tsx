@@ -35,7 +35,10 @@ const RecoveryPass = () => {
 						usuario: res.username,
 					})
 					.then((res) => {
-						history.push(`/login`);
+						history.push({
+							pathname: `/login`,
+							state: { from: 'recoveredPassword' },
+						});
 					})
 					.catch((err) => {
 						toast.error(err.message);

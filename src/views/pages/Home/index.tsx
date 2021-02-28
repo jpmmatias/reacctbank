@@ -58,6 +58,7 @@ const Home: React.FC = () => {
 				})
 				.then((res) => {
 					setRedirectLogin(true);
+					toast.success('Cadastro feito com sucesso!');
 				})
 				.catch((err) => {
 					toast.error('500: Erro interno do servidor');
@@ -102,7 +103,14 @@ const Home: React.FC = () => {
 	}
 
 	if (redirectLogin) {
-		return <Redirect to='/login' />;
+		return (
+			<Redirect
+				to={{
+					pathname: '/login',
+					state: { from: 'createdAccount' },
+				}}
+			/>
+		);
 	}
 	return (
 		<>
@@ -214,20 +222,20 @@ const Home: React.FC = () => {
 									/>
 									{errors.password2 && <p>{errors.password2}</p>}
 								</InputMessage>
+								<Button
+									text='Acessar'
+									textColor='#9B9B9B'
+									textSize={17}
+									textWeight={500}
+									backgroundColor='#D8D8D8'
+									backgroundColorHover='#8C52E5'
+									textColorHover='#fff'
+									icon={arrowIcon}
+									widthSize={width <= 1024 ? 220 : 276.7}
+									heightSize={47.66}
+									type='submit'
+								></Button>
 							</form>
-							<Button
-								text='Acessar'
-								textColor='#9B9B9B'
-								textSize={17}
-								textWeight={500}
-								backgroundColor='#D8D8D8'
-								backgroundColorHover='#8C52E5'
-								textColorHover='#fff'
-								icon={arrowIcon}
-								widthSize={width <= 1024 ? 220 : 276.7}
-								heightSize={47.66}
-								type='submit'
-							></Button>
 						</Card>
 					</div>
 				</div>

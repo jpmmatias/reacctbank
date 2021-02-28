@@ -20,6 +20,10 @@ export interface User {
 	senhaTemporaria: string;
 }
 
+export interface LocationLoginState {
+	from: string;
+}
+
 export interface LancamentoProps {
 	conta?: number;
 	contaDestino?: string;

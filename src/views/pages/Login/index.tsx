@@ -4,11 +4,11 @@ import SectionHome from '../../components/Section';
 import Card from '../../components/Card';
 import Button from '../../components/Button';
 import arrowIcon from '../../../assets/icons/right-arrow 1.svg';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import api from '../../../services/api';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
-import { IToken } from '../../../types';
+import { IToken, LocationLoginState } from '../../../types';
 import { useDispatch } from 'react-redux';
 import { UserInfo } from '../../../store/modules/user/actions';
 import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
@@ -19,6 +19,7 @@ const Login = () => {
 	const dispatch = useDispatch();
 	const { width } = useWindowDimensions();
 	const history = useHistory();
+	const location = useLocation<LocationLoginState>();
 
 	const [storage, setStorage] = useState<IToken>((): any => {
 		let storageToken = () => localStorage.getItem('@tokenApp');
@@ -27,6 +28,16 @@ const Login = () => {
 
 	useEffect(() => {
 		!!storage ? history.push('/dashboard') : localStorage.clear();
+		switch (location.state ? location.state.from : '') {
+			case 'createdAccount':
+				toast.success('Conta criada com sucesso!');
+				break;
+			case 'recoveredPassword':
+				toast.success('Senha trocada com sucesso!');
+				break;
+			default:
+				break;
+		}
 	}, [storage]);
 
 	function handleLogin(e: React.FormEvent<HTMLFormElement>) {
@@ -45,8 +56,8 @@ const Login = () => {
 	}
 	return (
 		<>
+			<ToastContainer />
 			<SectionHome background='purple'>
-				<ToastContainer />
 				<header>
 					<Link className='link' to='/'>
 						<img src={logo} alt='Gama Academy' />
