@@ -146,13 +146,13 @@ const Dashboard = () => {
 									<div className='cardContentTotal'>
 										<h2>Transações</h2>
 										<span>
-											R$:{' '}
+											R$:
 											{globalDadosUser?.contaBanco?.lancamentos?.reduce(
 												(
-													acc: LancamentoProps,
+													acc: number,
 													currentValue: LancamentoProps
 												) => {
-													return acc.valor + currentValue.valor;
+													return acc + currentValue.valor
 												},
 												0
 											)}
@@ -180,10 +180,10 @@ const Dashboard = () => {
 											R$:{' '}
 											{globalDadosUser?.contaCredito?.lancamentos?.reduce(
 												(
-													acc: LancamentoProps,
+													acc: number,
 													currentValue: LancamentoProps
 												) => {
-													return acc.valor + currentValue.valor;
+													return acc + currentValue.valor
 												},
 												0
 											)}
