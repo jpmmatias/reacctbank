@@ -22,7 +22,7 @@ export interface User {
 
 export interface LancamentoProps {
 	conta?: number;
-	contaDestino?: string;
+	contaDestino: string;
 	data: string;
 	descricao: string;
 	login?: string;
@@ -71,6 +71,11 @@ export interface TransacoesConta{
 	tipoMovimento:string,
 }
 export interface IPagamentoConta{
+	//descricao:string,
+	//id:number,
+	//login:string,
+	//padrao:boolean,
+	//tipoMovimento:string,
 	conta:number;
 	contaDestino:string,
 	data:string,

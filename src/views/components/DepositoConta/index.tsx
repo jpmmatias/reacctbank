@@ -3,7 +3,7 @@ import Card from '../Card';
 import { Container } from './styles';
 import { useDispatch, useStore } from 'react-redux';
 import { DadosUser, IDepositoConta, IPlanoConta, User } from '../../../types';
-import { DadosUserInfo, DepositoContaInfo, UpdateSaldoContaBanco, UpdateSaldoContaCredito} from '../../../store/modules/user/actions';
+import { DepositoContaInfo, UpdateSaldoContaBanco, UpdateSaldoContaCredito} from '../../../store/modules/user/actions';
 import api from '../../../services/api';
 import Headers from '../../../services/headers';
 
@@ -43,12 +43,9 @@ const DepositoConta = () => {
         })
         .then((res)=>{
             console.log("sucesso")
-            let dadosUser:DadosUser = store.getState().dadosUser
             switch(deposito.planoConta){
                 case 838:
-                    dadosUser.contaBanco.saldo += deposito.valor;
-                    dadosUser.contaBanco.lancamentos.push(deposito)
-                    dispatch(DadosUserInfo(dadosUser))
+                    dispatch(UpdateSaldoContaBanco(deposito.valor))
                     break;
                 case 840:
                     dispatch(UpdateSaldoContaCredito(deposito.valor))
