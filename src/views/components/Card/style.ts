@@ -59,6 +59,7 @@ export const Container = styled.div`
 			background: none;
 			padding: 5px;
 			font-weight: 600;
+			margin-bottom:15px;
 
       @media(max-width: 360px) {
         width: 100px;
