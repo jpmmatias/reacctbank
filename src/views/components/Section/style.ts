@@ -21,7 +21,8 @@ export const Container = styled.section<sectionProps>`
 	header {
 		height: 10%;
 		margin: 30px 45px;
-		@media (max-width: 618px) {
+
+		@media (max-width: 768px) {
 			margin: 20px 25px;
 		}
 	}
@@ -29,14 +30,12 @@ export const Container = styled.section<sectionProps>`
 	.main {
 		display: flex;
 		justify-content: space-around;
-		height: 70%;
 		z-index: -1;
 
-		@media (max-width: 618px) {
+		@media (max-width: 768px) {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-			height: auto;
 		}
 
 		.callToAction {
@@ -46,6 +45,16 @@ export const Container = styled.section<sectionProps>`
 			justify-content: center;
 			width: 281px;
 			margin-bottom: 4%;
+      
+      @media (max-width: 360px) {
+        display: flex;
+        align-items: center;
+      }
+      
+      @media (max-width: 500px) {
+        display: flex;
+        align-items: center;
+      }
 
 			p {
 				color: #fff;
@@ -53,7 +62,7 @@ export const Container = styled.section<sectionProps>`
 				margin-bottom: 12px;
 			}
 
-			@media (max-width: 618px) {
+			@media (max-width: 768px) {
 				width: auto;
 				p {
 					font-size: 18px;
@@ -70,17 +79,23 @@ export const Container = styled.section<sectionProps>`
 			justify-content: center;
 			width: 349px;
 			height: 400px;
+
 			@media (max-width: 1024px) {
 				width: 300px;
 				height: 70%;
 				margin: 0;
 			}
-			@media (max-width: 618px) {
+
+			@media (max-width: 768px) {
 				width: 70%;
 				div {
 					margin-bottom: 15px;
 				}
 			}
+
+      @media(max-width: 360px) {
+        width:
+      }
 		}
 	}
 
@@ -88,37 +103,56 @@ export const Container = styled.section<sectionProps>`
 		display: flex;
 		height: 100%;
 
+    @media(max-width: 360px) {
+      .phoneSection {
+        img {
+          margin: -2rem;
+        }
+      }
+    }
+
 		@media (max-width: 1024px) {
+			transition: all 0.5s;
 			display: flex;
-			flex-direction: column;
+      flex-direction: column;
 			.phoneSection {
-				height: 50%;
 				&:first-of-type {
 					h1 {
+            text-align: center;
 						font-size: 28px !important;
-						margin: 1rem 0 !important;
+						margin: 1rem !important;
 					}
+
 					img {
-						height: 150px !important;
-						width: 150px !important;
+						height: 180px !important;
+						width: 200px !important;
+            margin: 6px;
 					}
+
+          p {
+            margin-bottom: 6px;
+          }
 				}
 
 				&:last-of-type {
 					h1 {
+            text-align: center;
 						font-size: 28px !important;
-						margin: 1rem 0 !important;
+						margin: 0 0 !important;
 					}
+
 					img {
 						height: 150px !important;
 						width: 150px !important;
+            margin: 5px 32px 0 0;
 					}
+
+          p {
+            text-align: center;
+            font-size: 16px;
+          }
 				}
 
-				p {
-					font-size: 1.1em;
-					margin-bottom: 20px;
-				}
 			}
 		}
 
@@ -171,10 +205,13 @@ export const Container = styled.section<sectionProps>`
 
 				img {
 					height: 350px;
-					width: 350px;
+					width: 300px;
 				}
 
 				.paragraphwrapper {
+          /* width: 459px;
+					margin: 0 auto; */
+
 					p {
 						font-size: 18px;
 						font-weight: 400;
@@ -188,7 +225,7 @@ export const Container = styled.section<sectionProps>`
 		display: flex;
 		height: 100%;
 
-		@media (max-width: 618px) {
+		@media (max-width: 768px) {
 			display: flex;
 			flex-direction: column;
 			margin-top: 2.5rem;
@@ -215,7 +252,7 @@ export const Container = styled.section<sectionProps>`
 				}
 				p {
 					font-size: 18px;
-					@media (max-width: 618px) {
+					@media (max-width: 768px) {
 						padding: 0 10%;
 					}
 				}
@@ -240,52 +277,75 @@ export const Container = styled.section<sectionProps>`
 		
 
 		div {
-			width: 459px;
+			display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 90%;
 			color: #fff;
 			h1 {
 				font-weight: bold;
-				font-size: 42px;
+				font-size: 30px;
 				margin-bottom: 36px;
 				padding:0 5%;
-				@media (max-width: 618px) {
+				@media (max-width: 768px) {
 					font-weight: bold;
-					font-size: 32px;;
+					font-size: 26px;
 					margin-bottom: 36px;
-					word-break:break-all
+					word-break: break-all;
 				}
 			}
 		}
 			}
 			p {
 				font-weight: 500;
-				font-size: 23px;
+				font-size: 18px;
 				padding:0 5%;
-				@media (max-width: 618px) {
+
+				@media (max-width: 768px) {
 					font-size: 18px;
-			}
+			  }
 		}
 	}
 	.lastSection {
 		display: flex;
 		justify-content: center;
-		align-items: center;
 		height: 100%;
-		@media (max-width: 618px) {
-					flex-direction:column
-			}
+
+		@media (max-width: 768px) {
+			flex-direction: column;
+      margin-top: 36px;
+    }
+
 		.imageWrapper,
 		.content {
 			width: 100%;
 		}
+
 		.imageWrapper {
 			display: flex;
 			justify-content: center;
 			align-items: center;
+
 			img {
-				width: 50%;
-				height: auto;
+        margin: 36px 0 0 40px;
+				height: 350px;
+				width: 250px;
+
+        @media (max-width: 768px) {
+            margin: 8px;
+            height: 280px;
+            width: 210px;
+          }
+
+        @media (max-width: 360px) {
+          margin: 12px;
+          height: 240px;
+          width: 180px;
+        }
+        }
 			}
 		}
+
 		.content {
 			display: flex;
 			justify-content: center;
@@ -299,26 +359,27 @@ export const Container = styled.section<sectionProps>`
 					font-size: 42px;
 					line-height: 49px;
 					padding-right: 30px;
-					margin-bottom: 15px;
-					margin-bottom: 40px;
+					margin-bottom: 20px;
 					padding: 0 5%;
-					@media (max-width: 618px) {
-				text-align:center;
-			
-			}
+
+					@media (max-width: 768px) {
+            text-align:center;
+          } 
 				}
+
 				p {
 					font-weight: 300;
 					font-size: 14px;
 					margin-bottom: 15px;
 					padding: 0 5%;
-					@media (max-width: 618px) {
-			text-align:center;
-			}
+
+					@media (max-width: 768px) {
+            text-align: center;
+          }
 				}
 			}
 		}
-	}
+	
 	.subtitulo {
 		text-align: center;
 		font-weight: normal;

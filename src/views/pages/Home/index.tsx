@@ -214,6 +214,7 @@ const Home: React.FC = () => {
 									/>
 									{errors.password2 && <p>{errors.password2}</p>}
 								</InputMessage>
+							</form>
 								<Button
 									text='Acessar'
 									textColor='#9B9B9B'
@@ -223,20 +224,22 @@ const Home: React.FC = () => {
 									backgroundColorHover='#8C52E5'
 									textColorHover='#fff'
 									icon={arrowIcon}
-									widthSize={width <= 1024 ? 240 : 276.7}
+									widthSize={width <= 1024 ? 220 : 276.7}
 									heightSize={47.66}
 									type='submit'
 								></Button>
-							</form>
 						</Card>
 					</div>
 				</div>
 			</Section>
 			<Section background='gray'>
 				<div className='secondSection'>
+
 					<div className='phoneSection'>
 						<h1>Conta digital do Gama Academy</h1>
-						<img src={phoneImage} alt='Apl' />
+            <div className='imgwrapper'>
+						  <img src={phoneImage} alt='Apl' />
+            </div>
 						<div className='paragraphwrapper'>
 							<p>
 								Rende mais que a poupança, sem taxa de manutenção nem tarifas
