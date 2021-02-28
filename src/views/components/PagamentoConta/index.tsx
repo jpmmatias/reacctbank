@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Card from '../Card';
 import { Container } from './styles';
 import { useDispatch, useStore } from 'react-redux';
-import { IPagamentoConta } from '../../../types';
+import { DadosUser, IPagamentoConta } from '../../../types';
 import api from '../../../services/api';
-import { UpdateSaldoContaBanco, UpdateSaldoContaCredito } from '../../../store/modules/user/actions';
+import { DadosUserInfo, UpdateSaldoContaBanco, UpdateSaldoContaCredito } from '../../../store/modules/user/actions';
 
 
 const PagamentoConta = () => {
@@ -44,12 +44,17 @@ const PagamentoConta = () => {
                 Authorization: localStorage.getItem('@tokenApp'),
             },
         }).then((res) => {
+            let dadosUser:DadosUser = store.getState().dadosUser
             switch(pagamento.conta){
                 case dadosUser.contaBanco.id:
-                    dispatch(UpdateSaldoContaBanco(pagamento.valor * -1))
+                    dadosUser.contaBanco.saldo -= pagamento.valor;
+                    dadosUser.contaBanco.lancamentos.push({...pagamento, valor:pagamento.valor*-1})
+                    dispatch(DadosUserInfo(dadosUser))
                     break;
                 case dadosUser.contaCredito.id:
-                    dispatch(UpdateSaldoContaCredito(pagamento.valor * -1))
+                    dadosUser.contaCredito.saldo -= pagamento.valor;
+                    dadosUser.contaCredito.lancamentos.push({...pagamento, valor:pagamento.valor*-1})
+                    dispatch(DadosUserInfo(dadosUser))
                     break;
                 default:
                     break;
