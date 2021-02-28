@@ -17,7 +17,7 @@ const Login = () => {
 	const [username, setUsername] = useState('');
 	const [password, setpassword] = useState('');
 	const dispatch = useDispatch();
-	const { width, height } = useWindowDimensions();
+	const { width } = useWindowDimensions();
 	const history = useHistory();
 
 	const [storage, setStorage] = useState<IToken>((): any => {

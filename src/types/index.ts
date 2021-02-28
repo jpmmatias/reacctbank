@@ -11,13 +11,13 @@ export interface Form {
 }
 
 export interface User {
-	cpf:string,
-	id:number,
-	login:string,
-	name:string,
-	senha:string,
-	redefinirSenha:boolean,
-	senhaTemporaria:string,
+	cpf: string;
+	id: number;
+	login: string;
+	name: string;
+	senha: string;
+	redefinirSenha: boolean;
+	senhaTemporaria: string;
 }
 
 export interface LancamentoProps {
@@ -28,6 +28,7 @@ export interface LancamentoProps {
 	login?: string;
 	planoConta?: number;
 	valor: number;
+	hidden?: boolean;
 }
 
 export interface DadosUser {
@@ -43,47 +44,46 @@ export interface DadosUser {
 	};
 }
 
-export interface IPlanoContaComponent{
-	login:string;
+export interface IPlanoContaComponent {
+	login: string;
 }
 
-export interface IPlanoConta{
-	descricao:string,
-	id:number,
-	login:string,
-	padrao:boolean,
-	tipoMovimento:string,
+export interface IPlanoConta {
+	descricao: string;
+	id: number;
+	login: string;
+	padrao: boolean;
+	tipoMovimento: string;
 }
-export interface IDepositoConta{
-	conta:number;
-	data:string,
-	descricao:string,
-	login:string,
-	planoConta:number,
-	valor: number
-
+export interface IDepositoConta {
+	conta: number;
+	data: string;
+	descricao: string;
+	login: string;
+	planoConta: number;
+	valor: number;
 }
-export interface TransacoesConta{
-	descricao:string,
-	id:number,
-	login:string,
-	padrao:boolean,
-	tipoMovimento:string,
+export interface TransacoesConta {
+	descricao: string;
+	id: number;
+	login: string;
+	padrao: boolean;
+	tipoMovimento: string;
 }
-export interface IPagamentoConta{
-	conta:number;
-	contaDestino:string,
-	data:string,
-	descricao:string,
-	login:string,
-	planoConta:number,
-	valor: number
+export interface IPagamentoConta {
+	conta: number;
+	contaDestino: string;
+	data: string;
+	descricao: string;
+	login: string;
+	planoConta: number;
+	valor: number;
 }
 
 export interface IState {
-	user: User,
-	dadosUser: DadosUser,
-	PlanosConta: IPlanoConta[],
-	PagamentoConta: IPagamentoConta[],
-	SetScreen:React.Dispatch<any>,
-  }
+	user: User;
+	dadosUser: DadosUser;
+	PlanosConta: IPlanoConta[];
+	PagamentoConta: IPagamentoConta[];
+	SetScreen: React.Dispatch<any>;
+}

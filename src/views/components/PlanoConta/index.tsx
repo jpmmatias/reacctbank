@@ -4,7 +4,6 @@ import Card from '../Card';
 import { Container } from './styles';
 import { IPlanoConta } from '../../../types';
 import api from '../../../services/api';
-import headers from '../../../services/headers';
 import { PlanoContaInfo } from '../../../store/modules/user/actions';
 
 import { useDispatch, useStore } from 'react-redux';
@@ -41,7 +40,12 @@ const PlanoConta = () => {
 		console.log(plano);
 		const user = store.getState().user;
 		api
-			.post(`lancamentos/planos-conta?login=${user.login}`, plano, headers)
+			.post(`lancamentos/planos-conta?login=${user.login}`, plano, {
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: localStorage.getItem('@tokenApp'),
+				},
+			})
 			.then((res) => {
 				dispatch(PlanoContaInfo(plano));
 				setPlanosConta([...planosConta, plano]);
@@ -78,6 +82,7 @@ const PlanoConta = () => {
 											</option>
 										);
 									}
+									return null;
 								})}
 							</select>
 						</div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import logo from '../../../assets/images/logo.svg';
 import SectionHome from '../../components/Section';
 import Card from '../../components/Card';
@@ -13,7 +13,7 @@ import useWindowDimensions from '../../../utils/hooks/useWindowDimensions';
 const RecoveryPass = () => {
 	const [username, setUsername] = useState('');
 	const [email, setemail] = useState('');
-	const { width, height } = useWindowDimensions();
+	const { width } = useWindowDimensions();
 
 	const history = useHistory();
 

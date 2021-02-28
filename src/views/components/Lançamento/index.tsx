@@ -9,6 +9,7 @@ const Lancamento = ({
 	contaDestino,
 	valor,
 	data,
+	hidden,
 }: LancamentoProps) => {
 	return (
 		<Container>
@@ -19,7 +20,7 @@ const Lancamento = ({
 				<div>
 					<h1>{descricao}</h1>
 					<h2>{contaDestino}</h2>
-					<span>R$: {valor}</span>
+					<span>R$: {!hidden && valor}</span>
 				</div>
 			</Content>
 			<Data>{data}</Data>

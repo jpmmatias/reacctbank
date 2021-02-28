@@ -42,7 +42,7 @@ const Home: React.FC = () => {
 	const [redirectLogin, setRedirectLogin] = useState(false);
 	const [errors, setErrors] = useState<Form>(intialState);
 	const [form, setForm] = useState<Form>(intialState);
-	const { height, width } = useWindowDimensions();
+	const { width } = useWindowDimensions();
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -215,31 +215,30 @@ const Home: React.FC = () => {
 									{errors.password2 && <p>{errors.password2}</p>}
 								</InputMessage>
 							</form>
-								<Button
-									text='Acessar'
-									textColor='#9B9B9B'
-									textSize={17}
-									textWeight={500}
-									backgroundColor='#D8D8D8'
-									backgroundColorHover='#8C52E5'
-									textColorHover='#fff'
-									icon={arrowIcon}
-									widthSize={width <= 1024 ? 220 : 276.7}
-									heightSize={47.66}
-									type='submit'
-								></Button>
+							<Button
+								text='Acessar'
+								textColor='#9B9B9B'
+								textSize={17}
+								textWeight={500}
+								backgroundColor='#D8D8D8'
+								backgroundColorHover='#8C52E5'
+								textColorHover='#fff'
+								icon={arrowIcon}
+								widthSize={width <= 1024 ? 220 : 276.7}
+								heightSize={47.66}
+								type='submit'
+							></Button>
 						</Card>
 					</div>
 				</div>
 			</Section>
 			<Section background='gray'>
 				<div className='secondSection'>
-
 					<div className='phoneSection'>
 						<h1>Conta digital do Gama Academy</h1>
-            <div className='imgwrapper'>
-						  <img src={phoneImage} alt='Apl' />
-            </div>
+						<div className='imgwrapper'>
+							<img src={phoneImage} alt='Apl' />
+						</div>
 						<div className='paragraphwrapper'>
 							<p>
 								Rende mais que a poupança, sem taxa de manutenção nem tarifas

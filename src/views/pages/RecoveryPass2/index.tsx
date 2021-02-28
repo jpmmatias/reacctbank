@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import logo from '../../../assets/images/logo.svg';
 import { Link } from 'react-router-dom';
 import SectionHome from '../../components/Section';
@@ -16,19 +16,11 @@ const RecoveryPass = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [password2, setPassword2] = useState('');
-	const { width, height } = useWindowDimensions();
+	const { width } = useWindowDimensions();
 
 	const history = useHistory();
 
 	let { temporaryPass } = useParams<{ temporaryPass: string }>();
-
-	const validateForm = async (form: any) => {
-		return await NewPasswordSchema.validate(form, { abortEarly: false }).then(
-			(res: any) => {
-				return res;
-			}
-		);
-	};
 
 	function handleRecoveryPass(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();

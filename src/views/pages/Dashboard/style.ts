@@ -24,6 +24,7 @@ export const Sidebar = styled.aside`
 		}
 	}
 	div.logo {
+		cursor: pointer;
 		width: 100%;
 		margin-top: 15%;
 		margin-bottom: 12%;
@@ -101,11 +102,26 @@ export const Content = styled.main<ContentProps>`
 	margin: auto;
 	height: 90%;
 	width: 70%;
+
+	.logoutButton{
+		width: 40px;
+    height: auto;
+		cursor: pointer;
+		img{
+			width:100%;
+			height:auto;
+		}
+	}
 	.lancamentosCard{
 		width: 100%;
 		height:48%;
 		display: flex;
 		margin-top: 3%;
+		.cardLancamentosWrapper{
+			overflow-y:auto;
+			width: 100%;
+			border-radius: 8px;
+		}
 		@media (max-width: 728px) {
 			height: 30%;
 		}
@@ -196,7 +212,7 @@ export const Content = styled.main<ContentProps>`
 			font-weight: 400;
 		}
 		span {
-			font-size: 30px;
+			font-size: 22px;
 			font-weight: 700;
 			line-height: 35px;
 		}
