@@ -51,8 +51,11 @@ const DepositoConta = () => {
                     dispatch(DadosUserInfo(dadosUser))
                     break;
                 case 840:
-                    dispatch(UpdateSaldoContaCredito(deposito.valor))
-                    dispatch(UpdateSaldoContaBanco(deposito.valor * -1))
+                    dadosUser.contaBanco.saldo -= deposito.valor;
+                    dadosUser.contaCredito.saldo += deposito.valor;
+                    dadosUser.contaCredito.lancamentos.push(deposito)
+                    dadosUser.contaBanco.lancamentos.push({...deposito,valor:deposito.valor * -1})
+                    dispatch(DadosUserInfo(dadosUser))
                     break;
                 default:
                     break;
