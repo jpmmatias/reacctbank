@@ -222,6 +222,9 @@ const Dashboard = () => {
 											/>
 										</div>
 									}
+									{!(globalDadosUser?.contaBanco?.lancamentos?.length > 0 || globalDadosUser?.contaCredito?.lancamentos?.length > 0) &&
+										<h1>Ainda não houve nenhum lançamento.</h1>
+									}
 								</div>
 							</Card>
 						</div>
