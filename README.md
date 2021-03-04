@@ -131,12 +131,12 @@ React Bank
 
 <!-- CONTACT -->
 
-## Contatos
+## Grupo
 
-- [Bruno Lourenço](https://github.com/bruunos)
-- [Christian Spinelli](https://github.com/ChristianSpinelli) - chris.spinelli93@gmail.com
-- [Gustavo "Piá" de Moraes Xavier](https://github.com/piagja)
-- [João Pedro Matias](https://github.com/jpmmatias) - jpmmatias@gmail.com
+- [Bruno Lourenço](https://github.com/bruunos) - Responsável pela interação com API na dashobard do projeto 
+- [Christian Spinelli](https://github.com/ChristianSpinelli) - Responsável pela interação com API na dashobard do projeto
+- [Gustavo "Piá" de Moraes Xavier](https://github.com/piagja) - Responsável pela responsividade do projeto
+- [João Pedro Matias](https://github.com/jpmmatias) - Responsável pela interação com API nas páginas de login, troca de senha e criação de conta, e layout do projeto
 
 <!-- ACKNOWLEDGEMENTS -->
 
