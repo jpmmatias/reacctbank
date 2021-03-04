@@ -21,7 +21,7 @@ const DepositoConta = () => {
 		data: '',
 		descricao: 'Depósito',
 		login: '',
-		planoConta: 838,
+		planoConta:3509,
 		valor: 0,
 	});
 
@@ -48,12 +48,12 @@ const DepositoConta = () => {
 			.then((res) => {
 				let dadosUser: DadosUser = store.getState().dadosUser;
 				switch (deposito.planoConta) {
-					case 838:
+					case 3509:
 						dadosUser.contaBanco.saldo += deposito.valor;
 						dadosUser.contaBanco.lancamentos.push(deposito);
 						dispatch(DadosUserInfo(dadosUser));
 						break;
-					case 840:
+					case 3511:
 						dadosUser.contaBanco.saldo -= deposito.valor;
 						dadosUser.contaCredito.saldo += deposito.valor;
 						dadosUser.contaCredito.lancamentos.push(deposito);
@@ -114,8 +114,8 @@ const DepositoConta = () => {
 										)
 									}
 								>
-									<option value={838}>Conta Banco</option>
-									<option value={840}>Conta Crédito</option>
+									<option value={3509}>Conta Banco</option>
+									<option value={3511}>Conta Crédito</option>
 								</select>
 							</div>
 						</div>

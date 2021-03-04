@@ -26,7 +26,7 @@ const PagamentoConta = () => {
 		data: '',
 		descricao: 'PAGAMENTO_LUZ',
 		login: '',
-		planoConta: 841,
+		planoConta:3510,
 		valor: 0,
 	});
 
